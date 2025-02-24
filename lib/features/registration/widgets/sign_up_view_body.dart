@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/utils/themes.dart';
+import 'package:mentroverso/core/widgets/text_field.dart';
+import '../../../core/utils/app_routes.dart';
+import 'SignUpGradientButton.dart';
+import 'build_gender_option.dart';
+import 'have_account_text.dart';
+import 'icons_row.dart';
+import 'or_divider.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
@@ -12,230 +20,101 @@ class SignUpViewBody extends StatefulWidget {
 class _SignUpViewBodyState extends State<SignUpViewBody> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Stack(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0, bottom: 30),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: ColorResources.white.withOpacity(.25),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric( vertical: 12),
+            child: Row(
+              children: [
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: ColorResources.white,
+                    size: 18,
                   ),
+                  onTap: () {
+                    GoRouter.of(context).pop(AppRouter.router);
+                  },
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 40),
-                      _HeaderText(),
-                      SizedBox(height: 30),
-                      _NameFields(),
-                      SizedBox(height: 20),
-                      _EmailField(),
-                      SizedBox(height: 20),
-                      _PasswordFields(),
-                      SizedBox(height: 20),
-                      _FacultyField(),
-                      SizedBox(height: 20),
-                      _MajorField(),
-                      SizedBox(height: 20),
-                      _GenderSelector(),
-                      SizedBox(height: 30),
-                      _ContinueWith(),
-                      SizedBox(height: 30),
-                      SignUpButton(),
-                      SizedBox(height: 20),
-                      _LoginPrompt(),
-                    ],
-                  ),
-                ),
-              ]),
+                Text(
+                  'Create an account',
+                  style: Styles.textStyle20,
+                )
+              ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HeaderText extends StatelessWidget {
-  const _HeaderText();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Create an account',
-      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-class _NameFields extends StatelessWidget {
-  const _NameFields();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: _buildTextField('First name')),
-        const SizedBox(width: 10),
-        Expanded(child: _buildTextField('Last name')),
-      ],
-    );
-  }
-}
-
-class _EmailField extends StatelessWidget {
-  const _EmailField();
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildTextField('Email');
-  }
-}
-
-class _PasswordFields extends StatelessWidget {
-  const _PasswordFields();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildTextField('Password', isPassword: true),
-        const SizedBox(height: 20),
-        _buildTextField('Confirm Password', isPassword: true),
-      ],
-    );
-  }
-}
-
-class _FacultyField extends StatelessWidget {
-  const _FacultyField();
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildTextField('Faculty');
-  }
-}
-
-class _MajorField extends StatelessWidget {
-  const _MajorField();
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildTextField('Major');
-  }
-}
-
-class _GenderSelector extends StatelessWidget {
-  const _GenderSelector();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Text('Gender: '),
-        Row(
-          children: [
-            Radio(value: 'Male', groupValue: 'Gender', onChanged: (value) {}),
-            const Text('Male'),
-          ],
-        ),
-        Row(
-          children: [
-            Radio(value: 'Female', groupValue: 'Gender', onChanged: (value) {}),
-            const Text('Female'),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _ContinueWith extends StatelessWidget {
-  const _ContinueWith();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Expanded(child: Divider()),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text('Or continue with'),
-        ),
-        Expanded(child: Divider()),
-      ],
-    );
-  }
-}
-
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.pinkAccent,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: const Center(
-        child: Text('Sign up',
-            style: TextStyle(color: Colors.white, fontSize: 16)),
-      ),
-    );
-  }
-}
-
-class _LoginPrompt extends StatelessWidget {
-  const _LoginPrompt();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Already have an account? '),
-          GestureDetector(
-            onTap: () {},
-            child: const Text('Log in',
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+          Row(
+            children: [
+              Expanded(
+                child: CustomTextFormField(
+                  text: 'First name',
+                  label: 'First name',
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: CustomTextFormField(
+                  text: 'Last name',
+                  label: 'Last name',
+                ),
+              ),
+            ],
           ),
+          CustomTextFormField(
+            text: 'Email',
+            label: 'Enter your email',
+          ),
+          CustomTextFormField(
+            text: 'Password',
+            label: 'Enter your password',
+          ),
+          CustomTextFormField(
+            text: 'Confirm Password',
+            label: 'Confirm your password',
+          ),
+          CustomTextFormField(
+            text: 'Faculty',
+            label: 'Enter your Faculty',
+          ),
+          CustomTextFormField(
+            text: 'Major',
+            label: 'Enter your Major',
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          GenderPicker(
+            onGenderSelected: (String) {},
+          ),
+          const SizedBox(height: 8),
+          const OrDivider(),
+          const SizedBox(height: 8),
+          const IconsRow(),
+          const SizedBox(height: 8),
+          AlreadyHaveAccount(
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kLogIn);
+            },
+
+          ),
+          const SizedBox(height: 10),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SignUpGradientButton(
+                text: "Sign up",
+                onPressed: () {
+                },
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 }
 
-Widget _buildTextField(String label, {bool isPassword = false}) {
-  return Container(
-    decoration: BoxDecoration(
-      color: ColorResources.gry3,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: TextField(
-      obscureText: isPassword,
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle:   Styles.textStyle12,
-
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-    ),
-  );
-}

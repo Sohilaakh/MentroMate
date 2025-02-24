@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mentroverso/core/utils/color_resources.dart';
 
 class SignUpBackGroundColor extends StatelessWidget {
   const SignUpBackGroundColor({super.key});

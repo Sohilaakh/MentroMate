@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/app_routes.dart';
-import 'gradient_button.dart';
+import '../../../core/widgets/gradient_button.dart';
 import 'custom_gradient_circle.dart';
-import 'gradient_outline_button.dart';
+import '../../../core/widgets/gradient_outline_button.dart';
 import 'guest_text.dart';
 
 class AuthViewBody extends StatelessWidget {

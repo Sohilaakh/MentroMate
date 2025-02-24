@@ -11,7 +11,7 @@ class CustomGradientCircle extends StatelessWidget {
       height: 280,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           colors: [
             Color(0xFFEB59B3),
             Color(0xFFC4609C),

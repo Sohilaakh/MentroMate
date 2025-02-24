@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/themes.dart';
 
-import '../../../core/utils/color_resources.dart';
+import '../utils/color_resources.dart';
 
 class GradientButton extends StatelessWidget {
   final String text;
