@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../core/utils/themes.dart';
+import '../../../../core/utils/themes.dart';
+
 
 class ContinueAsGuestText extends StatelessWidget {
   final VoidCallback onTap;

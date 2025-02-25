@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 
+import '../../features/registration/presentation/widgets/gradient_text.dart';
 import '../utils/themes.dart';
-import '../../features/registration/widgets/gradient_text.dart';
 
 class GradientOutlineButton extends StatelessWidget {
   final String text;

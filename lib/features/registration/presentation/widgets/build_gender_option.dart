@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/utils/color_resources.dart';
-import '../../../core/utils/themes.dart';
+import '../../../../core/utils/color_resources.dart';
+import '../../../../core/utils/themes.dart';
 
 class GenderPicker extends StatefulWidget {
   final Function(String) onGenderSelected;

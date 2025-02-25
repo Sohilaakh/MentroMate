@@ -1,9 +1,9 @@
 
 import 'package:go_router/go_router.dart';
 
-import '../../features/registration/views/auth_main_view.dart';
-import '../../features/registration/views/log_in_view.dart';
-import '../../features/registration/views/sign_up_view.dart';
+import '../../features/registration/presentation/views/auth_main_view.dart';
+import '../../features/registration/presentation/views/log_in_view.dart';
+import '../../features/registration/presentation/views/sign_up_view.dart';
 
 abstract  class AppRouter{
 

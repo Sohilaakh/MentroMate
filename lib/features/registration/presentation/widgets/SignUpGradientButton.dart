@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/themes.dart';
+import '../../../../core/utils/themes.dart';
+
 
 class SignUpGradientButton extends StatelessWidget {
   final String text;
