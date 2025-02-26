@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/themes.dart';
 
 
-class SignUpGradientButton extends StatelessWidget {
-  final String text;
+class FooterGradientButton extends StatelessWidget {
+  final String buttontext;
   final VoidCallback onPressed;
 
-  const SignUpGradientButton({super.key , required this.text,
+  const FooterGradientButton({super.key , required this.buttontext,
     required this.onPressed,});
 
   @override
@@ -39,7 +39,7 @@ class SignUpGradientButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          text,
+          buttontext,
           style: Styles.textStyle16,
         ),
       ),

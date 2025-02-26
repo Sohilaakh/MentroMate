@@ -17,14 +17,14 @@ class AlreadyHaveAccount extends StatelessWidget {
       children: [
          Text(
           text1,
-          style: Styles.textStyle16
+          style: Styles.textStyle14
         ),
-        const SizedBox(width: 5,),
+        const SizedBox(width: 3,),
         GestureDetector(
           onTap: onTap,
           child: Text(
             text2,
-            style: TextStyle( fontSize: 16,
+            style: TextStyle( fontSize: 14,
               fontWeight: FontWeight.w600,
               color: ColorResources.pink,
               decoration: TextDecoration.underline,

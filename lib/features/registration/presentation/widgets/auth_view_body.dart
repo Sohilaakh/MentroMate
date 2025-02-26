@@ -19,7 +19,7 @@ class AuthViewBody extends StatelessWidget {
         const CustomGradientCircle(),
         const SizedBox(height: 70),
         GradientButton(
-          text: 'sign up',
+          text: 'Sign up',
           onPressed: () {
             GoRouter.of(context).push(AppRouter.kSignUp);
 

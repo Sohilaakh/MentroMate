@@ -8,10 +8,10 @@ class LogIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
-          LogInBackground(),
+          const LogInBackground(),
           Center(
             child: SingleChildScrollView(
               child: LogInBody(),

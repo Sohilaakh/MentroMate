@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mentroverso/features/registration/presentation/widgets/log_in_Form.dart';
 
 import '../../../../core/utils/app_routes.dart';
 import '../../../../core/utils/color_resources.dart';
 import '../../../../core/utils/themes.dart';
-import '../../../../core/widgets/text_field.dart';
-import 'SignUpGradientButton.dart';
-import 'have_account_text.dart';
-import 'icons_row.dart';
-import 'or_divider.dart';
+import 'footer.dart';
 
 class LogInBody extends StatelessWidget {
-  const LogInBody({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+   LogInBody(
+      {super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -43,29 +44,27 @@ class LogInBody extends StatelessWidget {
               )
             ],
           ),
-          const Spacer(flex: 2,),
-          CustomTextFormField(
-            text: 'Email',
-            label: 'Enter your email',
+          const Spacer(
+            flex: 2,
           ),
-          CustomTextFormField(
-            text: 'Password',
-            label: 'Enter your password',
+          LogInForm(
+            emailController: emailController,
+            passwordController: passwordController,
           ),
-          const Spacer(flex: 1,),
-          const SizedBox(height: 16),
-          const OrDivider(),
-          const SizedBox(height: 8),
-          const IconsRow(),
-          AlreadyHaveAccount(
-            onTap: () {
+          const Spacer(
+            flex: 1,
+          ),
+          footer(
+            text1: 'Don’t have an account?',
+            text2: ' Sign up ',
+            buttonAction: () {
+              // GoRouter.of(context).push(AppRouter.kHome);
+
+            },
+            textAction: () {
               GoRouter.of(context).push(AppRouter.kSignUp);
-            }, text1: 'Don’t have an account? ', text2: 'Sign up ',
-          ),
-          const Spacer(),
-          SignUpGradientButton(
-            text: "Log in",
-            onPressed: () {},
+
+            }, buttonText: 'Log in',
           ),
         ],
       ),
