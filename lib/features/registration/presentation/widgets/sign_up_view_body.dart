@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
@@ -25,7 +26,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final TextEditingController facultyController = TextEditingController();
   final TextEditingController majorController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +41,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           key: formKey,
           child: Column(
             children: [
-              Header(text: 'Create an account',),
+              Header(
+                text: 'Create an account',
+              ),
               SignUpForm(
                 firstNameController: firstNameController,
                 lastNameController: lastNameController,
@@ -52,19 +54,31 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 majorController: majorController,
               ),
               footer(
-                text1: 'Already have an account? ',
-                text2: 'Log in',
-                buttonAction: () {
-                  if (formKey.currentState?.validate() == true) {
-                    print('Form is valid!');
-                  }
-                },
-                textAction: () {
-                  GoRouter.of(context).push(AppRouter.kLogIn);
+                  text1: 'Already have an account? ',
+                  text2: 'Log in',
+                  textAction: () {
+                    GoRouter.of(context).push(AppRouter.kLogIn);
+                  },
+                  buttonText: 'Sign up',
+                  buttonAction: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                      print('User registered: ${credential.user?.email}');
 
-                }, buttonText: 'Sign up',
-
-              ),
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  }),
             ],
           ),
         ),

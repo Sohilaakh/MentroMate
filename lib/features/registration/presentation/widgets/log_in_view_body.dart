@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
@@ -13,8 +14,9 @@ class LogInBody extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-   LogInBody(
-      {super.key,});
+  LogInBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,6 @@ class LogInBody extends StatelessWidget {
             Header(
               text: 'Welcome back!',
             ),
-
             const Spacer(
               flex: 2,
             ),
@@ -47,14 +48,28 @@ class LogInBody extends StatelessWidget {
             footer(
               text1: 'Don’t have an account?',
               text2: ' Sign up ',
-              buttonAction: () {
+              buttonAction: () async {
                 if (formKey.currentState?.validate() == true) {
+                  try {
+                    final credential = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text);
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      print('No user found for that email.');
+                    } else if (e.code == 'wrong-password') {
+                      print('Wrong password provided for that user.');
+                    }
+                  }catch(e){
+                    print(e.toString());
+                  }
                 }
               },
               textAction: () {
                 GoRouter.of(context).push(AppRouter.kSignUp);
-
-              }, buttonText: 'Log in',
+              },
+              buttonText: 'Log in',
             ),
           ],
         ),
