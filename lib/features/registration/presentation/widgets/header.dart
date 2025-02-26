@@ -4,8 +4,9 @@ import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/utils/themes.dart';
 import '../../../../core/utils/app_routes.dart';
 
-class SignUpHeader extends StatelessWidget {
-  const SignUpHeader({super.key});
+class Header extends StatelessWidget {
+  String text;
+   Header({super.key , required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class SignUpHeader extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            'Create an account',
+            text,
             style: Styles.textStyle20,
           ),
         ],

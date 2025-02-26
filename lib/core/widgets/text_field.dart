@@ -3,20 +3,23 @@ import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/utils/themes.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  String text;
+  final String text;
+  final String label;
+  final TextInputType keyboardType;
+  final String? Function(String?) validator;
+  final TextEditingController controller;
+  final bool obscureText;
+  final Widget? suffixIcon;
 
-  String label;
-  TextInputType keyboardType;
-  String? Function(String?) validator;
-  TextEditingController controller;
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
+    this.obscureText = false,
     required this.text,
     required this.label,
     required this.validator,
     required this.controller,
+    this.suffixIcon,
     this.keyboardType = TextInputType.text,
-
   });
 
   @override
@@ -30,49 +33,40 @@ class CustomTextFormField extends StatelessWidget {
             text,
             style: Styles.textStyle14,
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          SizedBox(
-            height: 40,
-            child: TextFormField(
-              cursorHeight: 20,
-              cursorColor: ColorResources.gry4,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: ColorResources.gry3,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: const BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: const BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
-                labelText: label,
-                labelStyle: Styles.textStyle12,
-                floatingLabelBehavior: FloatingLabelBehavior.never,
+          const SizedBox(height: 5),
+          TextFormField(
+            obscureText: obscureText,
+            cursorHeight: 15,
+            cursorColor: ColorResources.gry4,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: ColorResources.gry3,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
-              validator: validator,
-              keyboardType: keyboardType,
-              controller: controller,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.transparent),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.red),
+              ),
+              labelText: label,
+              labelStyle: Styles.textStyle12,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+              errorStyle: Styles.textStyle12.copyWith(color: Colors.red),
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              suffixIcon: suffixIcon,
             ),
+            validator: validator,
+            keyboardType: keyboardType,
+            controller: controller,
           ),
         ],
       ),

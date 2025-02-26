@@ -4,10 +4,10 @@ import '../../../../core/utils/themes.dart';
 
 
 class FooterGradientButton extends StatelessWidget {
-  final String buttontext;
+  final String buttonText;
   final VoidCallback onPressed;
 
-  const FooterGradientButton({super.key , required this.buttontext,
+  const FooterGradientButton({super.key , required this.buttonText,
     required this.onPressed,});
 
   @override
@@ -39,7 +39,7 @@ class FooterGradientButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          buttontext,
+          buttonText,
           style: Styles.textStyle16,
         ),
       ),

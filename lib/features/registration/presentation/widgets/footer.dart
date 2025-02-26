@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'SignUpGradientButton.dart';
+import 'footer_gradient_button.dart';
 import 'have_account_text.dart';
 import 'or_divider.dart';
 import 'icons_row.dart';
@@ -32,7 +32,7 @@ Function() textAction;
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FooterGradientButton(
-               onPressed: buttonAction, buttontext: buttonText,
+               onPressed: buttonAction, buttonText: buttonText,
 
             ),
           ],

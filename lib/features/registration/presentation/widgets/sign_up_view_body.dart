@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/footer.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/sign_up_form.dart';
-import 'package:mentroverso/features/registration/presentation/widgets/sign_up_header.dart';
+import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
 import '../../../../core/utils/app_routes.dart';
 import '../../../../core/utils/constants.dart';
 
@@ -15,6 +15,7 @@ class SignUpViewBody extends StatefulWidget {
 }
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
+  final formKey = GlobalKey<FormState>();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -23,6 +24,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       TextEditingController();
   final TextEditingController facultyController = TextEditingController();
   final TextEditingController majorController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,32 +37,36 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         color: ColorResources.gry3.withOpacity(0.25),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SignUpHeader(),
-            SignUpForm(
-              firstNameController: firstNameController,
-              lastNameController: lastNameController,
-              emailController: emailController,
-              passwordController: passwordController,
-              confirmPasswordController: confirmPasswordController,
-              facultyController: facultyController,
-              majorController: majorController,
-            ),
-            footer(
-              text1: 'Already have an account? ',
-              text2: 'Log in',
-              buttonAction: () {
-                // GoRouter.of(context).push(AppRouter.kHome);
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              Header(text: 'Create an account',),
+              SignUpForm(
+                firstNameController: firstNameController,
+                lastNameController: lastNameController,
+                emailController: emailController,
+                passwordController: passwordController,
+                confirmPasswordController: confirmPasswordController,
+                facultyController: facultyController,
+                majorController: majorController,
+              ),
+              footer(
+                text1: 'Already have an account? ',
+                text2: 'Log in',
+                buttonAction: () {
+                  if (formKey.currentState?.validate() == true) {
+                    print('Form is valid!');
+                  }
+                },
+                textAction: () {
+                  GoRouter.of(context).push(AppRouter.kLogIn);
 
-              },
-              textAction: () {
-                GoRouter.of(context).push(AppRouter.kLogIn);
+                }, buttonText: 'Sign up',
 
-              }, buttonText: 'Sign up',
-
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

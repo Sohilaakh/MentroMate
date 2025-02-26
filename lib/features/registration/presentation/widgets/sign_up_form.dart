@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/widgets/text_field.dart';
-
 import 'build_gender_option.dart';
+import 'package:mentroverso/core/utils/validators.dart';
 
-
-class SignUpForm extends StatelessWidget {
+class SignUpForm extends StatefulWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   final TextEditingController emailController;
@@ -12,7 +12,6 @@ class SignUpForm extends StatelessWidget {
   final TextEditingController confirmPasswordController;
   final TextEditingController facultyController;
   final TextEditingController majorController;
-
 
   const SignUpForm({
     super.key,
@@ -26,6 +25,14 @@ class SignUpForm extends StatelessWidget {
   });
 
   @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -35,8 +42,8 @@ class SignUpForm extends StatelessWidget {
               child: CustomTextFormField(
                 text: 'First name',
                 label: 'First name',
-                validator: (String? text) => text == null || text.isEmpty ? 'Please enter the first name' : null,
-                controller: firstNameController,
+                validator: (text) => validateField(text, 'first name'),
+                controller: widget.firstNameController,
               ),
             ),
             const SizedBox(width: 20),
@@ -44,8 +51,8 @@ class SignUpForm extends StatelessWidget {
               child: CustomTextFormField(
                 text: 'Last name',
                 label: 'Last name',
-                validator: (String? text) => text == null || text.isEmpty ? 'Please enter the last name' : null,
-                controller: lastNameController,
+                validator: (text) => validateField(text, 'last name'),
+                controller: widget.lastNameController,
               ),
             ),
           ],
@@ -53,41 +60,61 @@ class SignUpForm extends StatelessWidget {
         CustomTextFormField(
           text: 'Email',
           label: 'Enter your email',
-          validator: (String? text) => text == null || text.isEmpty ? 'Please enter the email' : null,
-          controller: emailController,
+          validator: validateEmail,
+          controller: widget.emailController,
         ),
         CustomTextFormField(
           text: 'Password',
           label: 'Enter your password',
-          validator: (String? text) => text == null || text.isEmpty ? 'Please enter the password' : null,
-          controller: passwordController,
+          validator: validatePassword,
+          controller: widget.passwordController,
+          obscureText: obscurePassword,
+          suffixIcon: IconButton(
+            icon: Icon(
+              obscurePassword ? Icons.visibility_off : Icons.visibility,
+              color: ColorResources.gry4,
+            ),
+            onPressed: () {
+              setState(() {
+                obscurePassword = !obscurePassword;
+              });
+            },
+          ),
         ),
         CustomTextFormField(
           text: 'Confirm Password',
           label: 'Confirm your password',
-          validator: (String? text) => text == null || text.isEmpty ? 'Please confirm your password' : null,
-          controller: confirmPasswordController,
-        ),
+          validator: (text) => validateConfirmPassword(text, widget.passwordController.text),
+          controller: widget.confirmPasswordController,
+          obscureText: obscureConfirmPassword,
+          suffixIcon: IconButton(
+            icon: Icon(
+              obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+              color: ColorResources.gry4,
+
+            ),
+            onPressed: () {
+              setState(() {
+                obscureConfirmPassword = !obscureConfirmPassword;
+              });
+            },
+          ),        ),
         CustomTextFormField(
           text: 'Faculty',
           label: 'Enter your Faculty',
-          validator: (String? text) => text == null || text.isEmpty ? 'Please enter the Faculty' : null,
-          controller: facultyController,
+          validator: (text) => validateField(text, 'Faculty'),
+          controller: widget.facultyController,
         ),
         CustomTextFormField(
           text: 'Major',
           label: 'Enter your Major',
-          validator: (String? text) => text == null || text.isEmpty ? 'Please enter the Major' : null,
-          controller: majorController,
+          validator: (text) => validateField(text, 'Major'),
+          controller: widget.majorController,
         ),
-
-        const SizedBox(
-          height: 8,
-        ),
+        const SizedBox(height: 8),
         GenderPicker(
-          onGenderSelected: (String) {},
+          onGenderSelected: (String gender) {},
         ),
-
       ],
     );
   }
