@@ -29,7 +29,7 @@ Function() textAction;
         ),
         const SizedBox(height: 23),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FooterGradientButton(
                onPressed: buttonAction, buttonText: buttonText,
