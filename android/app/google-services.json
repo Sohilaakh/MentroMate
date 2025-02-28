@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "744288585142",
+    "project_id": "mentroverso",
+    "storage_bucket": "mentroverso.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744288585142:android:aa4b89d509516fcdcd2d17",
+        "android_client_info": {
+          "package_name": "com.example.mentroverso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744288585142-qafps7ifbmbhbcv631u8dh740buiace5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentroverso",
+            "certificate_hash": "afa4aca3e2a330fb3fbf95a8fdf60bb4f1432212"
+          }
+        },
+        {
+          "client_id": "744288585142-rcp0vu5emh8d1h2634m6v1rpnicpa2d6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentroverso",
+            "certificate_hash": "b35874af7963bb2139c1b0504e39c491301c21fc"
+          }
+        },
+        {
+          "client_id": "744288585142-hvhcgkc81hq3nbt40qvtqmi0gpcoiq13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Uq-l4eSErKunoM63In7xsd2pLv1k-pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744288585142-hvhcgkc81hq3nbt40qvtqmi0gpcoiq13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
