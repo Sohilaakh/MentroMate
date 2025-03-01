@@ -21,14 +21,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final formKey = GlobalKey<FormState>();
 
   // Controllers for form fields
-  final TextEditingController firstNameController = TextEditingController(text: 'somaya');
-  final TextEditingController lastNameController = TextEditingController(text: 'saeed');
-  final TextEditingController emailController = TextEditingController(text :'somayasaeid75@gmail.com');
-  final TextEditingController passwordController = TextEditingController(text: '123456');
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController(text: '123456');
-  final TextEditingController facultyController = TextEditingController(text: 'ss');
-  final TextEditingController majorController = TextEditingController(text: 'ee');
+      TextEditingController();
+  final TextEditingController facultyController = TextEditingController();
+  final TextEditingController majorController = TextEditingController();
 
   final signUpUseCase =
       SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance));

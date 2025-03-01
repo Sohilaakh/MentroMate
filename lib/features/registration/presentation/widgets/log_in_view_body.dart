@@ -5,7 +5,6 @@ import 'package:mentroverso/features/registration/presentation/widgets/footer.da
 import 'package:mentroverso/features/registration/presentation/widgets/log_in_form.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
 import '../../../../core/utils/app_routes.dart';
-import '../../../../core/utils/constants.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/use_cases/log_in_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,9 +13,9 @@ class LogInBody extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController =
-      TextEditingController(text: 'somayasaeid75@gmail.com');
+      TextEditingController();
   final TextEditingController passwordController =
-      TextEditingController(text: '123456');
+      TextEditingController();
 
   // Use case and repo for login logic
   final logInUseCase = LogInUseCase(AuthRepositoryImpl(FirebaseAuth.instance));
