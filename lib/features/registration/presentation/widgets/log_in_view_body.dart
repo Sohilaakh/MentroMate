@@ -1,22 +1,27 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mentroverso/core/utils/color_resources.dart';
+import 'package:mentroverso/features/registration/presentation/widgets/footer.dart';
+import 'package:mentroverso/features/registration/presentation/widgets/log_in_form.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
-import 'package:mentroverso/features/registration/presentation/widgets/log_in_Form.dart';
-
 import '../../../../core/utils/app_routes.dart';
-import '../../../../core/utils/color_resources.dart';
-import 'footer.dart';
+import '../../../../core/utils/constants.dart';
+import '../../data/repositories/auth_repository_impl.dart';
+import '../../domain/use_cases/log_in_use_case.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LogInBody extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: 'somayasaeid75@gmail.com');
+  final TextEditingController passwordController =
+      TextEditingController(text: '123456');
 
-  LogInBody({
-    super.key,
-  });
+  // Use case and repo for login logic
+  final logInUseCase = LogInUseCase(AuthRepositoryImpl(FirebaseAuth.instance));
+
+  LogInBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,34 +40,30 @@ class LogInBody extends StatelessWidget {
             Header(
               text: 'Welcome back!',
             ),
-            const Spacer(
-              flex: 2,
-            ),
+            const Spacer(flex: 2),
             LogInForm(
               emailController: emailController,
               passwordController: passwordController,
             ),
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(flex: 1),
             footer(
               text1: 'Don’t have an account?',
               text2: ' Sign up ',
               buttonAction: () async {
                 if (formKey.currentState?.validate() == true) {
                   try {
-                    final credential = await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text);
+                    final credential = await logInUseCase(
+                      emailController.text,
+                      passwordController.text,
+                    );
+                    print('User logged in: ${credential.user?.email}');
+
                   } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      print('No user found for that email.');
-                    } else if (e.code == 'wrong-password') {
-                      print('Wrong password provided for that user.');
+                    if (e.code == 'invalid-credential') {
+                      print('No user found for that email or wrong password.');
                     }
-                  }catch(e){
-                    print(e.toString());
+                  } catch (e) {
+                    print('Error: $e');
                   }
                 }
               },
