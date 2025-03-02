@@ -20,6 +20,13 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     color: ColorResources.neutralGray,
   );
+
+  static TextStyle textStyle13 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    color: ColorResources.neutralGray,
+  );
+
   static TextStyle textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -35,7 +42,7 @@ abstract class Styles {
 
   static TextStyle textStyle16 = TextStyle(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     color: ColorResources.softWhite,
   );
 

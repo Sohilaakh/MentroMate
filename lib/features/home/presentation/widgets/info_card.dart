@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentroverso/core/utils/themes.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/color_resources.dart';
@@ -9,8 +10,8 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
-      padding: const EdgeInsets.only(left: 17, top: 9, right: 12),
+      margin: const EdgeInsets.symmetric( horizontal: 24),
+      padding: const EdgeInsets.only(left: 17, top: 9,  bottom: 9,right: 12),
       decoration: BoxDecoration(
         color: ColorResources.darkTransparentGray,
         borderRadius: BorderRadius.circular(10),
@@ -25,13 +26,11 @@ class InfoCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
+           Expanded(
             child: Text(
               'Explore CS with an expert mentor who opens doors to your future.',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
+              style: Styles.textStyle14,
+              maxLines: 4,
             ),
           ),
           Padding(

@@ -29,5 +29,7 @@ class ColorResources {
 
   static Color get darkTransparentGray => const Color(0x42192928);
 
+  static Color get darkTeal => const Color.fromRGBO(42, 76, 78, 0.8);
+
 
 }

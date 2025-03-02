@@ -1,14 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mentroverso/core/utils/color_resources.dart';
 import 'core/utils/app_routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
-     SystemUiOverlayStyle(
-      statusBarColor: ColorResources.transparentBlack,
+     const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
  ),
   );
