@@ -32,8 +32,8 @@ class _CustomNotchBottomNavBarState extends State<CustomNotchBottomNavBar> {
       notchColor: ColorResources.softWhite,
       bottomBarItems:  [
         BottomBarItem(
-          inActiveItem: Icon(Icons.laptop_outlined, color: ColorResources.softWhite),
-          activeItem: Icon(Icons.person, color: ColorResources.deepPink),
+          inActiveItem: Icon(Icons.rocket_launch , color: ColorResources.softWhite),
+          activeItem: Icon(Icons.rocket_launch , color: ColorResources.deepPink),
         ),
         BottomBarItem(
           inActiveItem: const Icon(Icons.home_outlined, color: Colors.white),

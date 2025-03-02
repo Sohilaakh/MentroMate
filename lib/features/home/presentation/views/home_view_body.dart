@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentroverso/features/home/presentation/widgets/info_card.dart';
 
+import '../../../../core/utils/color_resources.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/feature_card.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -11,8 +13,16 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          CustomAppBar(
+            icon: Icon(
+              Icons.menu,
+              color: ColorResources.softWhite,
+              size: 30,
+            ),
+          ),
           const SizedBox(height: 21),
           const InfoCard(),
           const SizedBox(height: 24),

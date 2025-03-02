@@ -20,8 +20,9 @@ class _HomeViewState extends State<HomeView> {
   int currentIndex = 1;
   final List<Widget> pages = [
     GrowingView(),
-    HomeView(),
-    ProfileView()
+
+    HomeViewBody(),
+    ProfileView(),
 
   ];
 
@@ -35,13 +36,6 @@ class _HomeViewState extends State<HomeView> {
         ),
         Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: CustomAppBar(
-              icon: Icon(
-                Icons.menu,
-                color: ColorResources.softWhite,
-                size: 30,
-              ),
-            ),
             body: pages[currentIndex],
             bottomNavigationBar: Padding(
               padding: const EdgeInsets.all(0),
