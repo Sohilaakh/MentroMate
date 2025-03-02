@@ -26,9 +26,9 @@ class AlreadyHaveAccount extends StatelessWidget {
             text2,
             style: TextStyle( fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: ColorResources.pink,
+              color: ColorResources.deepPink,
               decoration: TextDecoration.underline,
-              decorationColor: ColorResources.pink,
+              decorationColor: ColorResources.deepPink,
             ),
 
           ),

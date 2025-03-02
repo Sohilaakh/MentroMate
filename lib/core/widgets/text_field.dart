@@ -37,10 +37,10 @@ class CustomTextFormField extends StatelessWidget {
           TextFormField(
             obscureText: obscureText,
             cursorHeight: 15,
-            cursorColor: ColorResources.gry4,
+            cursorColor: ColorResources.neutralGray,
             decoration: InputDecoration(
               filled: true,
-              fillColor: ColorResources.gry3,
+              fillColor: ColorResources.lightGray,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
                 borderSide: const BorderSide(color: Colors.transparent),

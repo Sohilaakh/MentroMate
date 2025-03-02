@@ -11,7 +11,7 @@ class OrDivider extends StatelessWidget {
       children: [
         Expanded(
           child: Divider(
-            color: ColorResources.white,
+            color: ColorResources.softWhite,
             thickness: 1,
           ),
         ),
@@ -24,7 +24,7 @@ class OrDivider extends StatelessWidget {
         ),
         Expanded(
           child: Divider(
-            color: ColorResources.white,
+            color: ColorResources.softWhite,
             thickness: 1,
           ),
         ),

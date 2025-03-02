@@ -49,16 +49,16 @@ class _GenderPickerState extends State<GenderPicker> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: ColorResources.pink,
+                color: ColorResources.deepPink,
                 width: 2,
               ),
-              color: isSelected ? ColorResources.white : Colors.transparent,
+              color: isSelected ? ColorResources.softWhite : Colors.transparent,
             ),
             child: isSelected
                 ? Icon(
               Icons.check,
               size: 10,
-              color: ColorResources.pink,
+              color: ColorResources.deepPink,
             )
                 : null,
           ),

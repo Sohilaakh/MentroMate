@@ -25,7 +25,7 @@ class CustomGradientCircle extends StatelessWidget {
         margin: const EdgeInsets.all(7.0),
         decoration:  BoxDecoration(
           shape: BoxShape.circle,
-          color: ColorResources.gry2,
+          color: ColorResources.mutedGray,
         ),
       ),
     );

@@ -72,7 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
           suffixIcon: IconButton(
             icon: Icon(
               obscurePassword ? Icons.visibility_off : Icons.visibility,
-              color: ColorResources.gry4,
+              color: ColorResources.neutralGray,
             ),
             onPressed: () {
               setState(() {
@@ -90,7 +90,7 @@ class _SignUpFormState extends State<SignUpForm> {
           suffixIcon: IconButton(
             icon: Icon(
               obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-              color: ColorResources.gry4,
+              color: ColorResources.neutralGray,
 
             ),
             onPressed: () {

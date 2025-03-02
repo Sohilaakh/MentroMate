@@ -33,7 +33,7 @@ class GradientOutlineButton extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: ColorResources.gry,
+              color: ColorResources.darkGray,
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -45,7 +45,7 @@ class GradientOutlineButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: ColorResources.t,
+              backgroundColor: ColorResources.wineRed,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),

@@ -6,44 +6,45 @@ abstract class Styles {
 
     fontSize: 24,
     fontWeight: FontWeight.w600,
-    color: ColorResources.white,
+    color: ColorResources.softWhite,
   );
 
   static TextStyle textStyle20 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w400,
-    color: ColorResources.white,
+    color: ColorResources.softWhite,
   );
 
   static TextStyle textStyle12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    color: ColorResources.gry4,
+    color: ColorResources.neutralGray,
   );
   static TextStyle textStyle14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: ColorResources.white,
+    color: ColorResources.softWhite,
+
   );
 
   static TextStyle textStyle15 = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w400,
-    color: ColorResources.white,
+    color: ColorResources.softWhite,
   );
 
   static TextStyle textStyle16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: ColorResources.white,
+    color: ColorResources.softWhite,
   );
 
   static TextStyle textStyle16p = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: ColorResources.pink,
+    color: ColorResources.deepPink,
     decoration: TextDecoration.underline,
-    decorationColor: ColorResources.pink,
+    decorationColor: ColorResources.deepPink,
   );
 
 

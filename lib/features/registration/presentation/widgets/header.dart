@@ -20,7 +20,7 @@ class Header extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios,
-              color: ColorResources.white,
+              color: ColorResources.softWhite,
               size: 18,
             ),
           ),

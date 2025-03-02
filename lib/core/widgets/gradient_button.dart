@@ -33,7 +33,7 @@ class GradientButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow:  [
             BoxShadow(
-              color: ColorResources.gry,
+              color: ColorResources.darkGray,
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),

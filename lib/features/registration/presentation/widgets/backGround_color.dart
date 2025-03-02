@@ -10,11 +10,11 @@ class BackGroundColor extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: SweepGradient(
           colors: [
-            ColorResources.black,
-            ColorResources.pink,
-            ColorResources.gry,
-            ColorResources.green,
-            ColorResources.gry,
+            ColorResources.pureBlack,
+            ColorResources.deepPink,
+            ColorResources.darkGray,
+            ColorResources.forestGreen,
+            ColorResources.darkGray,
           ],
           stops: const [0.19, 0.34, 0.61, .73, 0.98],
           center: Alignment.center,

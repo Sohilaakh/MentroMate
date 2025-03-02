@@ -5,22 +5,32 @@ import 'package:mentroverso/features/registration/presentation/widgets/footer.da
 import 'package:mentroverso/features/registration/presentation/widgets/log_in_form.dart';
 import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
 import '../../../../core/utils/app_routes.dart';
+import '../../../../core/utils/dialog_helper.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/use_cases/log_in_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LogInBody extends StatelessWidget {
+class LogInBody extends StatefulWidget {
+
+  const LogInBody({super.key});
+
+  @override
+  State<LogInBody> createState() => _LogInBodyState();
+}
+
+class _LogInBodyState extends State<LogInBody> {
   final formKey = GlobalKey<FormState>();
+
+  final TextEditingController firstNameController = TextEditingController();
+
 
   final TextEditingController emailController =
       TextEditingController();
+
   final TextEditingController passwordController =
       TextEditingController();
 
-  // Use case and repo for login logic
   final logInUseCase = LogInUseCase(AuthRepositoryImpl(FirebaseAuth.instance));
-
-  LogInBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,7 @@ class LogInBody extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.88,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: ColorResources.gry3.withOpacity(0.25),
+        color: ColorResources.lightGray.withOpacity(0.25),
       ),
       child: Form(
         key: formKey,
@@ -51,18 +61,40 @@ class LogInBody extends StatelessWidget {
               buttonAction: () async {
                 if (formKey.currentState?.validate() == true) {
                   try {
-                    final credential = await logInUseCase(
+                     logInUseCase(
                       emailController.text,
                       passwordController.text,
                     );
-                    print('User logged in: ${credential.user?.email}');
+
+                    DialogHelper.showSuccessDialog(
+                      context: context,
+                      title: 'Success',
+                      description: 'Welcome back',
+                      onOkPress: () {
+                        GoRouter.of(context).push(AppRouter.kHome);
+                      },
+                    );
 
                   } on FirebaseAuthException catch (e) {
+                    String errorMessage = 'An error occurred. Please try again.';
                     if (e.code == 'invalid-credential') {
-                      print('No user found for that email or wrong password.');
+                      errorMessage = 'Invalid email or password.';
                     }
+
+                    DialogHelper.showErrorDialog(
+                      context: context,
+                      title: 'Login Failed',
+                      description: errorMessage,
+
+
+                    );
+
                   } catch (e) {
-                    print('Error: $e');
+                    DialogHelper.showWarningDialog(
+                      context: context,
+                      title: 'Error',
+                      description: 'Something went wrong. Please try again.',
+                    );
                   }
                 }
               },

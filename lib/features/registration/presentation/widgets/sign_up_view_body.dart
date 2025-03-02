@@ -6,6 +6,7 @@ import 'package:mentroverso/features/registration/presentation/widgets/sign_up_f
 import 'package:mentroverso/features/registration/presentation/widgets/header.dart';
 import '../../../../core/utils/app_routes.dart';
 import '../../../../core/utils/constants.dart';
+import '../../../../core/utils/dialog_helper.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/use_cases/sign_up_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,7 +21,6 @@ class SignUpViewBody extends StatefulWidget {
 class _SignUpViewBodyState extends State<SignUpViewBody> {
   final formKey = GlobalKey<FormState>();
 
-  // Controllers for form fields
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -41,7 +41,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: ColorResources.gry3.withOpacity(0.25),
+        color: ColorResources.lightGray.withOpacity(0.25),
       ),
       child: SingleChildScrollView(
         child: Form(
@@ -70,20 +70,34 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 buttonAction: () async {
                   if (formKey.currentState?.validate() == true) {
                     try {
-                      final credential = await signUpUseCase(
+                      await signUpUseCase(
                         emailController.text,
                         passwordController.text,
                       );
-                      print('User signed up: ${credential.user?.email}');
-                    }
+                      DialogHelper.showSuccessDialog(
+                        context: context,
+                        title: 'Account Created',
+                        description: 'Welcome, Your account has been successfully created.',
+                        onOkPress: () {
+                          GoRouter.of(context).push(AppRouter.kHome);
+                        },
+                      );                    }
                     on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
-                        print('The email address is already in use by another account.');
+                        DialogHelper.showErrorDialog(
+                          context: context,
+                          title: 'Sign Up Failed',
+                          description: 'This email is already linked to another account. Please use a different email.',
+
+                        );
                       }
                     }
                     catch (e) {
-                      print('Error: $e');
-                    }
+                      DialogHelper.showWarningDialog(
+                        context: context,
+                        title: 'Error',
+                        description: 'Something went wrong. Please try again.',
+                      );                    }
                   }
                 },
               ),

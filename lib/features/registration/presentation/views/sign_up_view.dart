@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/sgin_up_backGround_color.dart';
+import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 import '../widgets/sign_up_view_body.dart';
 
 class SignUpView extends StatelessWidget {
@@ -7,14 +7,15 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
-          SignUpBackGroundColor(),
-          Center(
-
-              child: SignUpViewBody(),
-
+          LinearGradientBackGroundColor(
+            beginColor: Alignment.topLeft,
+            endColor: Alignment.bottomRight,
+          ),
+          const Center(
+            child: SignUpViewBody(),
           ),
         ],
       ),
