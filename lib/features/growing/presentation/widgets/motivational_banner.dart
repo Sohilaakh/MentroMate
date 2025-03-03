@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/assets.dart';
@@ -15,7 +14,7 @@ class MotivationalBanner extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.only(left: 25 ,right: 25 ,top: 13,bottom: 13),
-          margin: EdgeInsets.only(left: 60, right: 35),
+          margin: const EdgeInsets.only(left: 60, right: 35),
           decoration: BoxDecoration(
             color: ColorResources.darkTransparentGray,
             borderRadius: BorderRadius.circular(10),

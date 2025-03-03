@@ -19,7 +19,7 @@ abstract  class AppRouter{
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) =>  HomeView(),
+        builder: (context, state) =>  const HomeView(),
       ),
       GoRoute(
         path: kLogIn,
@@ -33,7 +33,7 @@ abstract  class AppRouter{
 
       GoRoute(
         path: kHome,
-        builder: (context, state) =>  HomeView(),
+        builder: (context, state) =>  const HomeView(),
       ),
 
     ],

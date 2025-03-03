@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mentroverso/core/utils/color_resources.dart';
-import 'package:mentroverso/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:mentroverso/features/profile/presentation/views/profile_view.dart';
-import 'package:mentroverso/features/profile/presentation/widgets/profile_view_body.dart';
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
-import '../../../Growing/growingScreen.dart';
 import '../../../growing/presentation/views/growing_view.dart';
 import '../../../navigation/custom_button_navigation_bar.dart';
 import 'home_view_body.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -19,10 +15,10 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int currentIndex = 1;
   final List<Widget> pages = [
-    GrowingView(),
+    const GrowingView(),
 
-    HomeViewBody(),
-    ProfileView(),
+    const HomeViewBody(),
+    const ProfileView(),
 
   ];
 

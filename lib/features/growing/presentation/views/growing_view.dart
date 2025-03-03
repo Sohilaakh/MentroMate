@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/color_resources.dart';
@@ -19,7 +18,7 @@ class GrowingView extends StatelessWidget {
           size: 30,
         ),
       ),
-      body: const GrowingViewBody(),
+      body:  const GrowingViewBody(),
     );
   }
 }

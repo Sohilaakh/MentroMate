@@ -4,9 +4,9 @@ import 'package:mentroverso/core/utils/constants.dart';
 import 'package:mentroverso/core/utils/themes.dart';
 
 class FeatureCard extends StatelessWidget {
-  final String imagePath;
-  final String title;
-  final String description;
+   String imagePath;
+   String title;
+   String description;
   Function() onTap;
 
    FeatureCard({
@@ -36,6 +36,10 @@ class FeatureCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        radius: 0,
+
         onTap: onTap,
         child: Row(
           children: [
@@ -46,7 +50,7 @@ class FeatureCard extends StatelessWidget {
               ),
             ),
             Container(
-              width: .1,
+              width: 0.1,
               height: double.infinity,
               color: ColorResources.softWhite,
             ),
