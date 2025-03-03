@@ -31,7 +31,11 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     color: ColorResources.softWhite,
   );
-
+  static TextStyle textStyle14SoftPink = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: ColorResources.softPinkishWhite,
+  );
   static TextStyle textStyle15 = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w400,

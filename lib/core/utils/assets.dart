@@ -4,6 +4,9 @@ class AssetsData {
   static const workspace = 'assets/images/Workspace.png' ;
   static const sprout ='assets/images/Sprout.png';
   static const authImage ='assets/images/authImage.jpg';
+  static const logOutIcon ='assets/images/logout.png';
+  static const grads ='assets/images/grade.png';
+
 
 
 }
