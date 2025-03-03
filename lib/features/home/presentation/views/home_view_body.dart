@@ -32,7 +32,8 @@ class HomeViewBody extends StatelessWidget {
                   imagePath: '',
                   title: 'Questionnaire',
                   description: 'Discover your strengths and interests.',
-                  onTap: () {},
+                  onTap: () {
+                  },
                 ),
                 const SizedBox(height: 24),
                 FeatureCard(

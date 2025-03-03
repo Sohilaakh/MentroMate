@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 
+import '../../../../core/utils/assets.dart';
+
 class CustomGradientCircle extends StatelessWidget {
   const CustomGradientCircle({super.key});
 
@@ -26,6 +28,7 @@ class CustomGradientCircle extends StatelessWidget {
         decoration:  BoxDecoration(
           shape: BoxShape.circle,
           color: ColorResources.mutedGray,
+          
         ),
       ),
     );

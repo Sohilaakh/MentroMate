@@ -10,9 +10,7 @@ abstract  class AppRouter{
    static const kLogIn = '/logIn' ;
    static const kSignUp = '/signUp' ;
    static const kHome = '/home' ;
-
-
-
+   static const kAuth = 'kAuth';
 
 
    static final router = GoRouter(
@@ -35,6 +33,9 @@ abstract  class AppRouter{
         path: kHome,
         builder: (context, state) =>  const HomeView(),
       ),
+
+
+
 
     ],
   );

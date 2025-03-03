@@ -17,7 +17,7 @@ class AuthViewBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const CustomGradientCircle(),
-        const SizedBox(height: 70),
+        const SizedBox(height: 50),
         GradientButton(
           text: 'Sign up',
           onPressed: () {

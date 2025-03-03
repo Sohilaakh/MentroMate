@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 
@@ -46,7 +45,7 @@ abstract class Styles {
       shadows: [
         Shadow(
           color: Colors.black.withOpacity(0.1),
-          offset: Offset(1, 1),
+          offset: const Offset(1, 1),
           blurRadius: 2,
         ),
       ]
@@ -68,7 +67,7 @@ abstract class Styles {
       shadows: [
         Shadow(
           color: Colors.black.withOpacity(0.1),
-          offset: Offset(1, 1),
+          offset: const Offset(1, 1),
           blurRadius: 2,
         ),
       ]

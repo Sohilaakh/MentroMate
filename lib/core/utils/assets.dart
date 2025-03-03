@@ -3,5 +3,7 @@ class AssetsData {
   static const google = 'assets/images/Google.png' ;
   static const workspace = 'assets/images/Workspace.png' ;
   static const sprout ='assets/images/Sprout.png';
+  static const authImage ='assets/images/authImage.jpg';
+
 
 }
