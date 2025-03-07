@@ -19,7 +19,7 @@ class ProfileViewBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 65.0, horizontal: 18),
           child: Column(
             children: [
-              ProfileAvatar(),
+              const ProfileAvatar(),
               const SizedBox(height: 10),
               Text(
                 'Somaya Saeed',

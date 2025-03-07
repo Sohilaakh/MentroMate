@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -15,9 +14,11 @@ class ProfileAvatar extends StatelessWidget {
           width: 120,
           height: 120,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100 ),
+
             child: CircleAvatar(
               backgroundColor: ColorResources.darkTransparentGray,
+
             ),
           ),
         ),

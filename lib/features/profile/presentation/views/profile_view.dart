@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/color_resources.dart';
-import '../../../home/presentation/widgets/custom_app_bar.dart';
 import '../widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
@@ -9,10 +7,10 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.transparent,
 
-      body: const ProfileViewBody(),
+      body: ProfileViewBody()
     );
   }
 }

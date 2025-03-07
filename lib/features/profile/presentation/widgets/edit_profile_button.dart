@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/app_routes.dart';
 import '../../../../core/utils/color_resources.dart';
 import '../../../../core/utils/themes.dart';
 
@@ -15,8 +16,11 @@ class EditProfileButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorResources.lightTransparentGray,
             side: BorderSide.none,
-            shape: const StadiumBorder()),
-        onPressed: () {},
+            shape: const StadiumBorder()
+        ),
+        onPressed: () {
+          GoRouter.of(context).push(AppRouter.kUpdateProfileView);
+        },
         child: Text(
           'Edit Profile',
           style: Styles.textStyle15,
