@@ -4,7 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_routes.dart';
-import 'package:mentroverso/features/registration/presentation/AuthService.dart';
+import 'package:mentroverso/core/utils/AuthService.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 
 class IconsRow extends StatelessWidget {
   const IconsRow({super.key});
@@ -23,7 +25,7 @@ class IconsRow extends StatelessWidget {
             if (user != null) {
               if (context.mounted) {
                 print("registered, ${user.email}");
-                GoRouter.of(context).push(AppRouter.kLogIn);
+                GoRouter.of(context).push(AppRouter.kHome);
               }
             } else {
               print("User sign-in failed".trim());
@@ -36,7 +38,15 @@ class IconsRow extends StatelessWidget {
         IconButton(
           icon: FaIcon(FontAwesomeIcons.facebook,
               color: ColorResources.deepPink, size: 30),
-          onPressed: () {
+          onPressed: () async {
+            final AuthService authService = AuthService();
+            UserCredential? userCredential = await authService.signInWithFacebook();
+            if (userCredential != null) {
+              print("User signed in: ${userCredential.user?.displayName}");
+              GoRouter.of(context).push(AppRouter.kHome);
+            } else {
+              print("Facebook login failed.");
+            }
           },
         ),
       ],

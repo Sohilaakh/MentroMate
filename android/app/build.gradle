@@ -1,11 +1,20 @@
 buildscript {
+    ext.kotlin_version = '1.9.0'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
+        configurations.all {
+            resolutionStrategy {
+                force 'com.facebook.android:facebook-android-sdk:latest.release'
+            }
+        }
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
         classpath 'com.google.gms:google-services:4.4.2'
+        classpath 'androidx.multidex:multidex:2.0.1'
+
+//        classpath 'com.android.tools.build:gradle:16.0.3'
 
 
     }
@@ -30,6 +39,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
 
     kotlinOptions {
@@ -45,6 +55,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled true
+
     }
 
     buildTypes {
