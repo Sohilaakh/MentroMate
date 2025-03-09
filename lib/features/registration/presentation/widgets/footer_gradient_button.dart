@@ -25,8 +25,7 @@ class FooterGradientButton extends StatelessWidget {
           end: Alignment.centerLeft,
         ),
         borderRadius: BorderRadius.circular(4),
-        boxShadow:  const [
-        ],
+
       ),
 
       child: ElevatedButton(

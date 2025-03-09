@@ -5,7 +5,6 @@ import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_routes.dart';
 import 'package:mentroverso/core/utils/AuthService.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
 class IconsRow extends StatelessWidget {

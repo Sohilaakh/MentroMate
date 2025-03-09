@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mentroverso/core/utils/assets.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
@@ -6,6 +7,7 @@ import 'package:mentroverso/core/utils/themes.dart';
 import 'package:mentroverso/features/profile/presentation/widgets/profile_avatar.dart';
 import 'package:mentroverso/features/profile/presentation/widgets/profile_menu.dart';
 
+import '../../../../core/utils/app_routes.dart';
 import 'edit_profile_button.dart';
 
 class ProfileViewBody extends StatelessWidget {
@@ -43,12 +45,18 @@ class ProfileViewBody extends StatelessWidget {
               ProfileMenuItem(
                 title: 'Grades',
                 imagePath: AssetsData.grads,
-                onPress: () {},
+                onPress: () {
+                 GoRouter.of(context).push(AppRouter.kGradsView);
+
+                },
               ),
               ProfileMenuItem(
                 title: 'Feedbacks',
                 icon: LineAwesomeIcons.comment_solid,
-                onPress: () {},
+                onPress: () {
+                  GoRouter.of(context).push(AppRouter.kFeedbackView);
+
+                },
               ),
               ProfileMenuItem(
                 title: 'Log out',

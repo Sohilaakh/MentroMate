@@ -7,9 +7,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showLogo;
   final Function()? onPressed;
   final Widget? icon;
+  final CircleAvatar? circleAvatar;
 
   const CustomAppBar(
       {super.key,
+      this.circleAvatar,
       this.title,
       this.height = 90,
       this.showLogo = true,
@@ -21,28 +23,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: height,
       width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0x001c1a1d),
-            Color(-870829007),
-          ],
-          stops: [0.0, 1.0],
-          begin: Alignment.topLeft,
-        ),
+      decoration: BoxDecoration(
+        color: ColorResources.transparentBlack,
+
       ),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 10.0, left: 24 , right: 24 , ),
+        padding: const EdgeInsets.only(
+          bottom: 10.0,
+          left: 24,
+          right: 24,
+        ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            CircleAvatar(backgroundColor: ColorResources.darkTransparentGray),
+            if (circleAvatar != null)
+
+            CircleAvatar(
+
+                backgroundColor: ColorResources.darkTransparentGray,
+
+                child: circleAvatar),
             if (icon != null)
               IconButton(
                 onPressed: onPressed,
                 icon: icon!,
               ),
+
           ],
         ),
       ),

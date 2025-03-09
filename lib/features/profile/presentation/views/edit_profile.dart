@@ -20,9 +20,10 @@ class UpdateProfileView extends StatelessWidget {
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: true,
           foregroundColor: Colors.white,
+
         ),
         backgroundColor: Colors.transparent,
-        body: const UpdateProfileViewBody(),
+        body:  UpdateProfileViewBody(),
       ),
     ]);
   }
