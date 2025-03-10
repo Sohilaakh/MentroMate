@@ -25,7 +25,7 @@ class ProfileViewBody extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 'Somaya Saeed',
-                style: Styles.textStyle16,
+                style: Styles.textStyle15,
               ),
               Text("SomayaSaeed75@gmail.com",
                   style: Styles.textStyle14SoftPink),

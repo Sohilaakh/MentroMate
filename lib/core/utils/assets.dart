@@ -6,6 +6,11 @@ class AssetsData {
   static const authImage ='assets/images/authImage.jpg';
   static const logOutIcon ='assets/images/logout.png';
   static const grads ='assets/images/grade.png';
+  static const lightOn ='assets/images/Light On.png';
+  static const score = 'assets/images/score.png';
+  static const grade1 ='assets/images/grades.png';
+  static const mentroverse ='assets/images/mentorverse logo_logo.png';
+
 
 
 

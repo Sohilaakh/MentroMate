@@ -1,49 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 
 abstract class Styles {
-  static TextStyle textStyle24 = TextStyle(
+  static TextStyle textStyle24 = GoogleFonts.poppins(
     fontSize: 24,
     fontWeight: FontWeight.w600,
     color: ColorResources.softWhite,
   );
 
-  static TextStyle textStyle20 = TextStyle(
+  static TextStyle textStyle20 = GoogleFonts.poppins(
     fontSize: 20,
     fontWeight: FontWeight.w400,
     color: ColorResources.softWhite,
   );
 
-  static TextStyle textStyle12 = TextStyle(
+  static TextStyle textStyle12 = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: ColorResources.neutralGray,
   );
 
-  static TextStyle textStyle13 = TextStyle(
-    fontSize: 13,
-    fontWeight: FontWeight.w400,
-    color: ColorResources.neutralGray,
-  );
 
-  static TextStyle textStyle14 = TextStyle(
-    fontSize: 14,
+  static TextStyle textStyle13 = GoogleFonts.poppins(
+    fontSize: 13,
     fontWeight: FontWeight.w400,
     color: ColorResources.softWhite,
   );
-  static TextStyle textStyle14SoftPink = TextStyle(
+  static TextStyle textStyle14SoftPink = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: ColorResources.softPinkishWhite,
   );
-  static TextStyle textStyle15 = TextStyle(
-    fontSize: 15,
+  static TextStyle textStyle14 = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: ColorResources.softWhite,
+  );
+
+  static TextStyle textStyle14Regular = GoogleFonts.poppins(
+    fontSize: 14,
     fontWeight: FontWeight.w400,
     color: ColorResources.softWhite,
   );
 
-  static TextStyle textStyle16 = TextStyle(
-    fontSize: 16,
+  static TextStyle textStyle15 = GoogleFonts.poppins(
+    fontSize: 15,
     fontWeight: FontWeight.w500,
     color: ColorResources.softWhite,
       shadows: [
@@ -56,7 +58,7 @@ abstract class Styles {
 
   );
 
-  static TextStyle textStyle16p = TextStyle(
+  static TextStyle textStyle16DeepPink = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: ColorResources.deepPink,
@@ -64,7 +66,7 @@ abstract class Styles {
     decorationColor: ColorResources.deepPink,
   );
 
-  static TextStyle textStyle12SoftPink = TextStyle(
+  static TextStyle textStyle12SoftPink = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: ColorResources.softPinkishWhite,

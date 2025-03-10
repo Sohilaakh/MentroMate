@@ -54,7 +54,7 @@ class ProfileMenuItem extends StatelessWidget {
           const SizedBox(width: 13),
           Text(
             title,
-            style: Styles.textStyle15,
+            style: Styles.textStyle14Regular,
           ),
         ],
       ),

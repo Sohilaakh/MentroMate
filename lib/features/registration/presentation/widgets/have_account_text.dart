@@ -17,7 +17,7 @@ class AlreadyHaveAccount extends StatelessWidget {
       children: [
          Text(
           text1,
-          style: Styles.textStyle14
+          style: Styles.textStyle13
         ),
         const SizedBox(width: 3,),
         GestureDetector(

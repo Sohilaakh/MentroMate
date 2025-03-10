@@ -21,7 +21,7 @@ class FeatureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric( horizontal: 24),
-      padding: const EdgeInsets.only(left: 17, top: 9, bottom: 9, right: 12),
+      padding: const EdgeInsets.only(left: 17, top: 6, bottom: 6, right: 12),
       height: Constant.getHeight(context)* 0.136,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -63,12 +63,13 @@ class FeatureCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Styles.textStyle16,
+                      style: Styles.textStyle15,
 
                     ),
+                    SizedBox(height: 6,),
                     Text(
                       description,
-                      style: Styles.textStyle13,
+                      style: Styles.textStyle12,
 
                     ),
                   ],

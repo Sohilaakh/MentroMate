@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/color_resources.dart';
 import '../../../../core/utils/themes.dart';
 
 class MotivationalBanner extends StatelessWidget {
-  const MotivationalBanner({super.key});
+  String text;
+  final String imagePath;
+   MotivationalBanner({super.key , required this.text , required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,13 @@ class MotivationalBanner extends StatelessWidget {
               ),
             ],
           ),
-          child: Text('Keep Learning, Keep Growing!',style: Styles.textStyle15,),
+          child: Text(text,style: Styles.textStyle13,),
         ),
         Positioned(
             bottom: -3,
             left: 37,
 
-            child: Image.asset(AssetsData.sprout , height: 45,)
+            child: Image.asset( imagePath, height: 43,)
         ),
       ],
     );

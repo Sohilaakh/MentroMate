@@ -19,7 +19,7 @@ class _GenderPickerState extends State<GenderPicker> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Gender', style: Styles.textStyle14,),
+        Text('Gender', style: Styles.textStyle13,),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -65,7 +65,7 @@ class _GenderPickerState extends State<GenderPicker> {
           const SizedBox(width: 8),
           Text(
             gender,
-            style: Styles.textStyle14,
+            style: Styles.textStyle13,
           ),
         ],
       ),

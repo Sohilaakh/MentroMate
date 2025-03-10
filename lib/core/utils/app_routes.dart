@@ -53,7 +53,7 @@ abstract  class AppRouter{
 
       GoRoute(
         path: kGradsView,
-        builder: (context, state) => const GradsView(),
+        builder: (context, state) => const GradesView(),
       ),
 
 

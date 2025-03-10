@@ -56,7 +56,7 @@ class GrowingOptionCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Styles.textStyle16.copyWith(
+                    style: Styles.textStyle15.copyWith(
                       fontWeight: FontWeight.bold,
                       color: ColorResources.softWhite,
                     ),

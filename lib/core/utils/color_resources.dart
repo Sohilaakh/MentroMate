@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class ColorResources {
 
-
   static Color get deepPink => const Color(0xFF76335C);
 
   static Color get softWhite => const Color(0xFFF7E9F2);
+
+  static Color get softWhite1 => const Color(0xCCF7E9F2);
+
 
   static Color get softPinkishWhite => const Color(0x99F7E9F2);
 

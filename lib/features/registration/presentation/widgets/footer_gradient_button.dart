@@ -39,7 +39,7 @@ class FooterGradientButton extends StatelessWidget {
         ),
         child: Text(
           buttonText,
-          style: Styles.textStyle16,
+          style: Styles.textStyle15,
         ),
       ),
     );
