@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
-
 import '../../features/registration/presentation/widgets/gradient_text.dart';
 import '../utils/constants.dart';
 import '../utils/themes.dart';
@@ -17,19 +16,31 @@ class GradientOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final containerGradient = const LinearGradient(
+      colors: [
+        Color(0xA9EB59B3),
+        Color(0xB8C4609C),
+        Color(0xFF3DC1AC),
+        Color(0xCD409C9B),
+      ],
+      stops: [0.0, 0.34, 0.69, 1.0],
+    );
+
+    final buttonGradient = const LinearGradient(
+      colors: [
+        Color(0xFF27111E),
+        Color(0xFF132223)
+
+      ],
+      stops: [0.0, 1.0],
+    );
+
     return Container(
-      width: Constant.getWidth(context)*0.6,
-      height: Constant.getHeight(context)*0.07,
+      width: Constant.getWidth(context) * 0.6,
+      height: Constant.getHeight(context) * 0.07,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFFEB59B3),
-            Color(0xFFC4609C),
-            Color(0xFF3DC1AC),
-            Color(0xFF409C9B),
-          ],
-          stops: [0.0, 0.34, 0.69, 1.0],
-        ),
+        gradient: containerGradient,
+        borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
             color: ColorResources.darkGray,
@@ -37,29 +48,31 @@ class GradientOutlineButton extends StatelessWidget {
             offset: const Offset(0, 5),
           ),
         ],
-        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(3.0),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: ColorResources.pureBlack,
+            padding: EdgeInsets.zero,
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
           ),
-          child: GradientText(
-            text: text,
-            style: Styles.textStyle24,
-            gradient: const LinearGradient(
-              colors: [
-                Color(0xFFEB59B3),
-                Color(0xFFC4609C),
-                Color(0xFF3DC1AC),
-                Color(0xFF409C9B),
-              ],
-              stops: [0.0, 0.34, 0.69, 1.0],
+          child: Ink(
+            decoration: BoxDecoration(
+              gradient: buttonGradient,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Container(
+              alignment: Alignment.center,
+              child: GradientText(
+                text: text,
+                style: Styles.textStyle24,
+                gradient: containerGradient,
+              ),
             ),
           ),
         ),

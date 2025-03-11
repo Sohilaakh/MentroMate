@@ -14,12 +14,12 @@ class CustomGradientCircle extends StatelessWidget {
         shape: BoxShape.circle,
         gradient: LinearGradient(
           colors: [
-            Color(0xFFEB59B3),
-            Color(0xFFC4609C),
+            Color(0xA9EB59B3),
+            Color(0xB8C4609C),
             Color(0xFF3DC1AC),
-            Color(0xFF409C9B),
-          ],
+            Color(0xCD409C9B),  ],
           stops: [0.0, 0.34, 0.69, 1.0],
+          begin: Alignment.topCenter,
         ),
       ),
       child: Container(

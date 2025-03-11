@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.dart';
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
-
+import 'package:mentroverso/features/registration/presentation/views/auth_main_view.dart';
 import '../../features/chatbot/presentation/views/chatbot_view.dart';
 import '../../features/interview/presentation/views/interview_view.dart';
 import '../../features/meeting/presentation/views/meeting_view.dart';
@@ -27,7 +27,6 @@ abstract  class AppRouter{
    static const kQuestionnaireView = '/kQuestionnaireView';
 
 
-// GoRouter.of(context).push(AppRouter.kUpdateProfileView);
 
 
    static final router = GoRouter(
@@ -45,7 +44,7 @@ abstract  class AppRouter{
 
       GoRoute(
         path: '/',
-        builder: (context, state) =>  const HomeView(),
+        builder: (context, state) =>  const AuthMainView(),
       ),
 
       GoRoute(
