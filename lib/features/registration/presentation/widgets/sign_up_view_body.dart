@@ -87,6 +87,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       height: Constant.getHeight(context) * 0.90,
       width: Constant.getWidth(context) * 0.88,
       padding: const EdgeInsets.all(15),
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: ColorResources.lightGray.withAlpha(64),
@@ -108,7 +109,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 facultyController: facultyController,
                 majorController: majorController,
               ),
-              footer(
+              Footer(
                 text1: 'Already have an account? ',
                 text2: 'Log in',
                 textAction: () {

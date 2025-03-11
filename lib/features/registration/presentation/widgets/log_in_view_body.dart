@@ -55,7 +55,7 @@ class _LogInBodyState extends State<LogInBody> {
               passwordController: passwordController,
             ),
             const Spacer(flex: 1),
-            footer(
+            Footer(
               text1: 'Don’t have an account?',
               text2: ' Sign up ',
               buttonAction: () async {

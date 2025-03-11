@@ -29,9 +29,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-
   bool obscurePassword = true;
-  bool obscureConfirmPassword = true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -73,32 +71,37 @@ class _SignUpFormState extends State<SignUpForm> {
             icon: Icon(
               obscurePassword ? Icons.visibility_off : Icons.visibility,
               color: ColorResources.neutralGray,
+              size: 25,
             ),
             onPressed: () {
               setState(() {
                 obscurePassword = !obscurePassword;
-              });
+              },);
             },
           ),
         ),
         CustomTextFormField(
           text: 'Confirm Password',
           label: 'Confirm your password',
-          validator: (text) => validateConfirmPassword(text, widget.passwordController.text),
+          validator: (text) =>
+              validateConfirmPassword(text, widget.passwordController.text),
           controller: widget.confirmPasswordController,
-          obscureText: obscureConfirmPassword,
+          obscureText: obscurePassword,
           suffixIcon: IconButton(
             icon: Icon(
-              obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+              obscurePassword ? Icons.visibility_off : Icons.visibility,
               color: ColorResources.neutralGray,
-
+              size: 25,
             ),
             onPressed: () {
-              setState(() {
-                obscureConfirmPassword = !obscureConfirmPassword;
-              });
+              setState(
+                () {
+                  obscurePassword = !obscurePassword;
+                },
+              );
             },
-          ),        ),
+          ),
+        ),
         CustomTextFormField(
           text: 'Faculty',
           label: 'Enter your Faculty',

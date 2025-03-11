@@ -4,14 +4,21 @@ import 'have_account_text.dart';
 import 'or_divider.dart';
 import 'icons_row.dart';
 
-class footer extends StatelessWidget {
-String text1 ;
-String text2;
-String buttonText;
-Function() buttonAction ;
-Function() textAction;
+class Footer extends StatelessWidget {
+  final String text1;
+  final String text2;
+  final String buttonText;
+  final Future<void> Function() buttonAction;
+  final Function() textAction;
 
-   footer({super.key,required this.text1 , required this.text2 , required this.buttonAction ,required this.textAction, required this.buttonText});
+  const Footer({
+    super.key,
+    required this.text1,
+    required this.text2,
+    required this.buttonAction,
+    required this.textAction,
+    required this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +39,11 @@ Function() textAction;
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FooterGradientButton(
-               onPressed: buttonAction, buttonText: buttonText,
-
+              onPressed: buttonAction,
+              buttonText: buttonText,
             ),
           ],
-        )
+        ),
       ],
     );
   }
