@@ -11,7 +11,7 @@ abstract class Styles {
 
   static TextStyle textStyle20 = GoogleFonts.poppins(
     fontSize: 20,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     color: ColorResources.softWhite,
   );
 
@@ -50,7 +50,7 @@ abstract class Styles {
     color: ColorResources.softWhite,
       shadows: [
         Shadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withAlpha(26),
           offset: const Offset(1, 1),
           blurRadius: 2,
         ),
@@ -61,9 +61,9 @@ abstract class Styles {
   static TextStyle textStyle16DeepPink = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: ColorResources.deepPink,
+    color: ColorResources.darkMauve,
     decoration: TextDecoration.underline,
-    decorationColor: ColorResources.deepPink,
+    decorationColor: ColorResources.darkMauve,
   );
 
   static TextStyle textStyle12SoftPink = GoogleFonts.poppins(
@@ -72,11 +72,17 @@ abstract class Styles {
     color: ColorResources.softPinkishWhite,
       shadows: [
         Shadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withAlpha(26),
           offset: const Offset(1, 1),
           blurRadius: 2,
         ),
       ]
 
+  );
+
+  static TextStyle textStyle18 = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: ColorResources.softWhite,
   );
 }

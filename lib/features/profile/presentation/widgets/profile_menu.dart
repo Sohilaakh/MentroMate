@@ -22,41 +22,43 @@ class ProfileMenuItem extends StatelessWidget {
     return InkWell(
       onTap: onPress,
       borderRadius: BorderRadius.circular(10),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-              color: ColorResources.lightTransparentGray,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 4,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10 , horizontal: 23),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: ColorResources.lightTransparentGray,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(38),
+                    blurRadius: 4,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: imagePath != null
+                  ? Image.asset(
+                imagePath!,
+                width: Constant.getHeight(context) * 0.04,
+                height: Constant.getHeight(context) * 0.04,
+                fit: BoxFit.cover,
+              )
+                  : Icon(
+                icon,
+                size: Constant.getHeight(context) * 0.04,
+                color: ColorResources.softWhite,
+              ),
             ),
-            child: imagePath != null
-                ? Image.asset(
-              imagePath!,
-              width: Constant.getHeight(context) * 0.04,
-              height: Constant.getHeight(context) * 0.04,
-              fit: BoxFit.cover,
-            )
-                : Icon(
-              icon,
-              size: Constant.getHeight(context) * 0.04,
-              color: ColorResources.softWhite,
+            const SizedBox(width: 13),
+            Text(
+              title,
+              style: Styles.textStyle14Regular,
             ),
-          ),
-          const SizedBox(width: 13),
-          Text(
-            title,
-            style: Styles.textStyle14Regular,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

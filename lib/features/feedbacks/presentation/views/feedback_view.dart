@@ -19,6 +19,8 @@ class FeedbackView extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            surfaceTintColor: ColorResources.transparentBlack,
+
             backgroundColor: ColorResources.transparentBlack,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white),

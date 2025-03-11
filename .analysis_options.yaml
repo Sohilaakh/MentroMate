@@ -1,0 +1,25 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+
+linter:
+  rules:
+    - avoid_print
+    - prefer_const_constructors
+    - prefer_final_fields
+    - use_key_in_widget_constructors
+    - avoid_classes_with_only_static_members
+    - always_put_required_named_parameters_first
+    - sort_constructors_first
+    - prefer_single_quotes
+    - avoid_unnecessary_containers
+    - camel_case_types
+    - file_names
+    - prefer_relative_imports
+    - constant_identifier_names
+    - public_member_api_docs
+    - avoid_empty_else
+    - no_logic_in_create_state
+    - require_trailing_commas

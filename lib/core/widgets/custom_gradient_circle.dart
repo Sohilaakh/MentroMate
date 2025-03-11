@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
+import 'package:mentroverso/core/utils/constants.dart';
 
 
 class CustomGradientCircle extends StatelessWidget {
@@ -8,8 +9,7 @@ class CustomGradientCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
-      height: 280,
+      height: Constant.getHeight(context)*0.33,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         gradient: LinearGradient(
@@ -23,7 +23,7 @@ class CustomGradientCircle extends StatelessWidget {
         ),
       ),
       child: Container(
-        margin: const EdgeInsets.all(7.0),
+        margin: const EdgeInsets.all(5.0),
         decoration:  BoxDecoration(
           shape: BoxShape.circle,
           color: ColorResources.mutedGray,

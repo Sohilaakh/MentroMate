@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_routes.dart';
-import 'package:mentroverso/core/utils/AuthService.dart';
+import 'package:mentroverso/core/utils/auth_service.dart';
 
 
 class IconsRow extends StatelessWidget {
@@ -17,7 +17,7 @@ class IconsRow extends StatelessWidget {
       children: [
         IconButton(
           icon:  FaIcon(FontAwesomeIcons.google,
-              color: ColorResources.deepPink, size: 30),
+              color: ColorResources.darkMauve, size: 30),
           onPressed: () async {
             final AuthService authService = AuthService();
             User? user = await authService.signInWithGoogle();
@@ -36,7 +36,7 @@ class IconsRow extends StatelessWidget {
         const SizedBox(width: 20),
         IconButton(
           icon: FaIcon(FontAwesomeIcons.facebook,
-              color: ColorResources.deepPink, size: 30),
+              color: ColorResources.darkMauve, size: 30),
           onPressed: () async {
             final AuthService authService = AuthService();
             UserCredential? userCredential = await authService.signInWithFacebook();

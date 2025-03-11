@@ -4,7 +4,11 @@ import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
 
+import '../../features/chatbot/presentation/views/chatbot_view.dart';
+import '../../features/interview/presentation/views/interview_view.dart';
+import '../../features/meeting/presentation/views/meeting_view.dart';
 import '../../features/profile/presentation/views/edit_profile.dart';
+import '../../features/questionnaire/presentation/views/questionnaire_view.dart';
 import '../../features/registration/presentation/views/log_in_view.dart';
 import '../../features/registration/presentation/views/sign_up_view.dart';
 
@@ -17,6 +21,11 @@ abstract  class AppRouter{
    static const kUpdateProfileView = '/kUpdateProfileView';
    static const kFeedbackView = '/kFeedbackView';
    static const kGradsView = '/kGradsView';
+   static const kInterviewView = '/kInterviewView';
+   static const kMeetingView = '/kMeetingView';
+   static const kChatbotView = '/kChatbotView';
+   static const kQuestionnaireView = '/kQuestionnaireView';
+
 
 // GoRouter.of(context).push(AppRouter.kUpdateProfileView);
 
@@ -26,6 +35,12 @@ abstract  class AppRouter{
       GoRoute(
         path: kLogIn,
         builder: (context, state) => const LogIn(),
+      ),
+
+
+      GoRoute(
+        path: kMeetingView,
+        builder: (context, state) => const MeetingView(),
       ),
 
       GoRoute(
@@ -54,6 +69,21 @@ abstract  class AppRouter{
       GoRoute(
         path: kGradsView,
         builder: (context, state) => const GradesView(),
+      ),
+
+      GoRoute(
+        path: kInterviewView,
+        builder: (context, state) => const InterviewView(),
+      ),
+
+      GoRoute(
+        path: kChatbotView,
+        builder: (context, state) => const ChatbotView(),
+      ),
+
+      GoRoute(
+        path: kQuestionnaireView,
+        builder: (context, state) => const QuestionnaireView(),
       ),
 
 

@@ -23,9 +23,7 @@ class GrowingOptionCard extends StatelessWidget {
         horizontal: 38,
       ),
       child: InkWell(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        radius: 0,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         onTap: onTap,
         child: Row(
           children: [
@@ -37,7 +35,7 @@ class GrowingOptionCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
+                    color: Colors.black.withAlpha(38),
                     blurRadius: 4,
                     offset: const Offset(0, 4),
                   ),

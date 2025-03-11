@@ -25,7 +25,7 @@ class FeedbackItem extends StatelessWidget {
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   colors: [
-                    ColorResources.deepPink,
+                    ColorResources.darkMauve,
                     ColorResources.softWhite,
                   ],
                   stops: [0.0, 1.0],
@@ -42,7 +42,7 @@ class FeedbackItem extends StatelessWidget {
                 child: Icon(
                   Icons.message,
                   size: 30,
-                  color: ColorResources.deepPink,
+                  color: ColorResources.darkMauve,
                 ),
               ),
             ),
