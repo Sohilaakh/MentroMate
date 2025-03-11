@@ -20,7 +20,7 @@ Function() textAction;
         const SizedBox(height: 22),
         const OrDivider(),
         const SizedBox(height: 8),
-        const IconsRow(),
+        IconsRow(),
         const SizedBox(height: 8),
         AlreadyHaveAccount(
           onTap: textAction,
