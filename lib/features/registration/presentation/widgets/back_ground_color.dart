@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 
@@ -11,13 +12,15 @@ class BackGroundColor extends StatelessWidget {
         gradient: SweepGradient(
           colors: [
             ColorResources.pureBlack,
-            ColorResources.deepPink,
+            ColorResources.darkMauve,
             ColorResources.darkGray,
             ColorResources.forestGreen,
             ColorResources.darkGray,
           ],
-          stops: const [0.19, 0.34, 0.61, .73, 0.98],
+          stops: const [0.05, 0.30, 0.61, .79, 1],
           center: Alignment.center,
+            transform:GradientRotation(2)
+
 
           // Full circle
         ),

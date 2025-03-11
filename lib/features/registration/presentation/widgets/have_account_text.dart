@@ -5,10 +5,10 @@ import '../../../../core/utils/themes.dart';
 
 class AlreadyHaveAccount extends StatelessWidget {
   final VoidCallback onTap;
-  String text1;
-  String text2 ;
+  final String text1;
+  final String text2 ;
 
-   AlreadyHaveAccount({super.key, required this.onTap , required this.text1 , required this.text2});
+   const AlreadyHaveAccount({super.key, required this.onTap , required this.text1 , required this.text2});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class AlreadyHaveAccount extends StatelessWidget {
       children: [
          Text(
           text1,
-          style: Styles.textStyle14
+          style: Styles.textStyle13
         ),
         const SizedBox(width: 3,),
         GestureDetector(
@@ -26,9 +26,9 @@ class AlreadyHaveAccount extends StatelessWidget {
             text2,
             style: TextStyle( fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: ColorResources.deepPink,
+              color: ColorResources.darkMauve,
               decoration: TextDecoration.underline,
-              decorationColor: ColorResources.deepPink,
+              decorationColor: ColorResources.darkMauve,
             ),
 
           ),

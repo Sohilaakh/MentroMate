@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/features/growing/presentation/widgets/growing_option_card.dart';
+import '../../../../core/utils/assets.dart';
 import 'motivational_banner.dart';
 
 class GrowingViewBody extends StatelessWidget {
@@ -16,7 +17,7 @@ class GrowingViewBody extends StatelessWidget {
             const SizedBox(
               height: 36,
             ),
-            const MotivationalBanner(),
+             MotivationalBanner(text: 'Keep Learning, Keep Growing!', imagePath : AssetsData.sprout),
             const SizedBox(
               height: 55,
             ),

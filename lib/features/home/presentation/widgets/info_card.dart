@@ -29,7 +29,7 @@ class InfoCard extends StatelessWidget {
            Expanded(
             child: Text(
               'Explore CS with an expert mentor who opens doors to your future.',
-              style: Styles.textStyle14,
+              style: Styles.textStyle13,
               maxLines: 4,
             ),
           ),

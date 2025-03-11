@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/utils/themes.dart';
+import 'package:mentroverso/features/grades/presentation/widgets/grades_view_body.dart';
 
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 
-class GradsView extends StatelessWidget {
-  const GradsView({super.key});
+class GradesView extends StatelessWidget {
+  const GradesView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class GradsView extends StatelessWidget {
             ),
             centerTitle: true,
             automaticallyImplyLeading: false,
-          ),
+          ),body: GradesViewBody(),
         ),
       ],
     );

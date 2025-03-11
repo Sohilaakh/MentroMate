@@ -207,7 +207,7 @@ packages:
     source: hosted
     version: "6.1.2"
   flutter_lints:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_lints
       sha256: "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1"
@@ -416,6 +416,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
+  loading_btn:
+    dependency: "direct main"
+    description:
+      name: loading_btn
+      sha256: ecc27ca22d611ee5d22db358410ca03c64b81644d952cb80f350b71746d82674
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   logging:
     dependency: transitive
     description:
@@ -504,6 +512,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      sha256: "0d77d5c6fa9b7f60202cedf748b568ba9ba38d3f30405d6ceae4da76f5185462"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.4"
   platform:
     dependency: transitive
     description:
@@ -541,6 +557,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: b21ebb8bc39cf72d11c7cfd809162a48c3800668ced1c9da3aade13a32cf6c1c
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   source_span:
     dependency: transitive
     description:

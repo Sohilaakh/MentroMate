@@ -25,13 +25,61 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController facultyController = TextEditingController();
   final TextEditingController majorController = TextEditingController();
 
-  final signUpUseCase =
-      SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance));
+  final signUpUseCase = SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance));
+
+  Future<void> _signUp() async {
+    if (formKey.currentState?.validate() != true) return;
+
+    try {
+      await signUpUseCase(
+        emailController.text,
+        passwordController.text,
+      );
+      if (!mounted) return;
+      _showSuccessDialog();
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      _handleAuthError(e);
+    } catch (e) {
+      if (!mounted) return;
+      _showGenericError();
+    }
+  }
+
+  void _showSuccessDialog() {
+    DialogHelper.showSuccessDialog(
+      context: context,
+      title: 'Account Created',
+      description: 'Welcome, Your account has been successfully created.',
+      onOkPress: () {
+        if (mounted) {
+          GoRouter.of(context).push(AppRouter.kHome);
+        }
+      },
+    );
+  }
+
+  void _handleAuthError(FirebaseAuthException e) {
+    if (e.code == 'email-already-in-use') {
+      DialogHelper.showErrorDialog(
+        context: context,
+        title: 'Sign Up Failed',
+        description: 'This email is already linked to another account. Please use a different email.',
+      );
+    }
+  }
+
+  void _showGenericError() {
+    DialogHelper.showWarningDialog(
+      context: context,
+      title: 'Error',
+      description: 'Something went wrong. Please try again.',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +87,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       height: Constant.getHeight(context) * 0.90,
       width: Constant.getWidth(context) * 0.88,
       padding: const EdgeInsets.all(15),
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: ColorResources.lightGray.withOpacity(0.25),
+        color: ColorResources.lightGray.withAlpha(64),
       ),
       child: SingleChildScrollView(
         child: Form(
@@ -60,46 +109,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 facultyController: facultyController,
                 majorController: majorController,
               ),
-              footer(
+              Footer(
                 text1: 'Already have an account? ',
                 text2: 'Log in',
                 textAction: () {
-                  GoRouter.of(context).push(AppRouter.kLogIn);
-                },
-                buttonText: 'Sign up',
-                buttonAction: () async {
-                  if (formKey.currentState?.validate() == true) {
-                    try {
-                      await signUpUseCase(
-                        emailController.text,
-                        passwordController.text,
-                      );
-                      DialogHelper.showSuccessDialog(
-                        context: context,
-                        title: 'Account Created',
-                        description: 'Welcome, Your account has been successfully created.',
-                        onOkPress: () {
-                          GoRouter.of(context).push(AppRouter.kHome);
-                        },
-                      );                    }
-                    on FirebaseAuthException catch (e) {
-                      if (e.code == 'email-already-in-use') {
-                        DialogHelper.showErrorDialog(
-                          context: context,
-                          title: 'Sign Up Failed',
-                          description: 'This email is already linked to another account. Please use a different email.',
-
-                        );
-                      }
-                    }
-                    catch (e) {
-                      DialogHelper.showWarningDialog(
-                        context: context,
-                        title: 'Error',
-                        description: 'Something went wrong. Please try again.',
-                      );                    }
+                  if (mounted) {
+                    GoRouter.of(context).push(AppRouter.kLogIn);
                   }
                 },
+                buttonText: 'Sign up',
+                buttonAction: _signUp,
               ),
             ],
           ),

@@ -23,7 +23,7 @@ class EditProfileButton extends StatelessWidget {
         },
         child: Text(
           'Edit Profile',
-          style: Styles.textStyle15,
+          style: Styles.textStyle14,
         ),
       ),
     );

@@ -15,57 +15,51 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 65.0, horizontal: 18),
-          child: Column(
-            children: [
-              const ProfileAvatar(),
-              const SizedBox(height: 10),
-              Text(
-                'Somaya Saeed',
-                style: Styles.textStyle16,
-              ),
-              Text("SomayaSaeed75@gmail.com",
-                  style: Styles.textStyle14SoftPink),
-              const SizedBox(height: 8),
-              const EditProfileButton(),
-              const SizedBox(height: 10),
-              Divider(
-                color: ColorResources.lightTransparentGray.withOpacity(0.5),
-                thickness: 0.1,
-              ),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            const ProfileAvatar(),
+            const SizedBox(height: 10),
+            Text(
+              'Somaya Saeed',
+              style: Styles.textStyle15,
+            ),
+            Text("SomayaSaeed75@gmail.com", style: Styles.textStyle14SoftPink),
+            const SizedBox(height: 8),
+            const EditProfileButton(),
+            const SizedBox(height: 10),
+            Divider(
+              color: ColorResources.lightTransparentGray.withAlpha(128),
+              thickness: 0.1,
+            ),
+            ProfileMenuItem(
+              title: 'Courses',
+              icon: LineAwesomeIcons.book_open_solid,
+              onPress: () {},
+            ),
+            ProfileMenuItem(
+              title: 'Grades',
+              imagePath: AssetsData.grads,
+              onPress: () {
+                GoRouter.of(context).push(AppRouter.kGradsView);
+              },
+            ),
+            ProfileMenuItem(
+              title: 'Feedbacks',
+              icon: LineAwesomeIcons.comment_solid,
+              onPress: () {
+                GoRouter.of(context).push(AppRouter.kFeedbackView);
+              },
+            ),
+            ProfileMenuItem(
+              title: 'Log out',
+              imagePath: AssetsData.logOutIcon,
+              onPress: () {},
+            ),
 
-              ProfileMenuItem(
-                title: 'Courses',
-                icon: LineAwesomeIcons.book_open_solid,
-                onPress: () {},
-              ),
-              ProfileMenuItem(
-                title: 'Grades',
-                imagePath: AssetsData.grads,
-                onPress: () {
-                 GoRouter.of(context).push(AppRouter.kGradsView);
-
-                },
-              ),
-              ProfileMenuItem(
-                title: 'Feedbacks',
-                icon: LineAwesomeIcons.comment_solid,
-                onPress: () {
-                  GoRouter.of(context).push(AppRouter.kFeedbackView);
-
-                },
-              ),
-              ProfileMenuItem(
-                title: 'Log out',
-                imagePath: AssetsData.logOutIcon,
-                onPress: () {  },
-
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );

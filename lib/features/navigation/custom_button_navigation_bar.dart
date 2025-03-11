@@ -33,15 +33,15 @@ class _CustomNotchBottomNavBarState extends State<CustomNotchBottomNavBar> {
       bottomBarItems:  [
         BottomBarItem(
           inActiveItem: Icon(Icons.rocket_launch , color: ColorResources.softWhite),
-          activeItem: Icon(Icons.rocket_launch , color: ColorResources.deepPink),
+          activeItem: Icon(Icons.rocket_launch , color: ColorResources.darkMauve),
         ),
         BottomBarItem(
           inActiveItem: const Icon(Icons.home_outlined, color: Colors.white),
-          activeItem: Icon(Icons.home, color: ColorResources.deepPink),
+          activeItem: Icon(Icons.home, color: ColorResources.darkMauve),
         ),
         BottomBarItem(
           inActiveItem: Icon(Icons.person_outlined, color: ColorResources.softWhite),
-          activeItem: Icon(Icons.person, color: ColorResources.deepPink),
+          activeItem: Icon(Icons.person, color: ColorResources.darkMauve),
         ),
       ],
       onTap: (index) {

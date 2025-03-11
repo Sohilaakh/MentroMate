@@ -9,11 +9,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?) validator;
   final TextEditingController controller;
   final bool obscureText;
-   Color? color = ColorResources.lightGray;
+  final Color? color;
   final Widget? suffixIcon;
-  final IconData? icon ;
+  final IconData? icon;
 
-    CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     this.obscureText = false,
     required this.text,
@@ -35,19 +35,16 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           Text(
             text,
-            style: Styles.textStyle14,
+            style: Styles.textStyle13,
           ),
           const SizedBox(height: 5),
           TextFormField(
-
             obscureText: obscureText,
             cursorHeight: 15,
             cursorColor: ColorResources.neutralGray,
             decoration: InputDecoration(
-              prefixIcon: Icon(icon , color: Colors.white,),
-
               filled: true,
-              fillColor: color,
+              fillColor: color ?? ColorResources.lightGray,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
                 borderSide: const BorderSide(color: Colors.transparent),

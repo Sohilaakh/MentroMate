@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/app_routes.dart';
+import '../../../../core/utils/constants.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../../../../core/widgets/gradient_outline_button.dart';
-import 'custom_gradient_circle.dart';
-import 'guest_text.dart';
+import '../../../../core/widgets/custom_gradient_circle.dart';
 
 class AuthViewBody extends StatelessWidget {
   const AuthViewBody({super.key});
@@ -13,11 +13,12 @@ class AuthViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const CustomGradientCircle(),
-        const SizedBox(height: 50),
+        SizedBox(height: Constant.getHeight(context) * 0.25),
+
+        CustomGradientCircle(),
+        Spacer(flex: 1,),
+
         GradientButton(
           text: 'Sign up',
           onPressed: () {
@@ -25,6 +26,8 @@ class AuthViewBody extends StatelessWidget {
 
           },
         ),
+        SizedBox(height: 20,),
+        // const SizedBox(height: 50),
         GradientOutlineButton(
           text: 'Log In',
 
@@ -32,12 +35,9 @@ class AuthViewBody extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.kLogIn);
           },
         ),
-        const SizedBox(height: 30),
-        ContinueAsGuestText(
-          onTap: () {
+        Spacer(flex: 2,),
 
-          },
-        )
+
       ],
     );
   }

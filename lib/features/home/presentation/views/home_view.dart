@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mentroverso/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:mentroverso/features/profile/presentation/views/profile_view.dart';
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 import '../../../growing/presentation/views/growing_view.dart';
 import '../../../navigation/custom_button_navigation_bar.dart';
-import 'home_view_body.dart';
+import '../widgets/home_view_body.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -12,15 +13,15 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
+enum HomeTabs { growing, home, profile }
+
 class _HomeViewState extends State<HomeView> {
-  int currentIndex = 1;
-  final List<Widget> pages = [
-    const GrowingView(),
-
-    const HomeViewBody(),
-    const ProfileView(),
-
-  ];
+  HomeTabs currentTab = HomeTabs.home;
+  final Map<HomeTabs, Widget> pages = {
+    HomeTabs.growing: const GrowingView(),
+    HomeTabs.home: const HomeViewBody(),
+    HomeTabs.profile: const ProfileView(),
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +33,17 @@ class _HomeViewState extends State<HomeView> {
         ),
         Scaffold(
             backgroundColor: Colors.transparent,
-            body: pages[currentIndex],
+            appBar: HomeAppBar(),
+            body: pages[currentTab],
             bottomNavigationBar: Padding(
               padding: const EdgeInsets.all(0),
               child: CustomNotchBottomNavBar(
                 onTap: (index) {
                   setState(() {
-                    currentIndex = index;
+                    currentTab = HomeTabs.values[index];
                   });
                 },
-                currentIndex: currentIndex,
+                currentIndex: currentTab.index,
               ),
             ))
       ],

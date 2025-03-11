@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/auth_view_body.dart';
-import '../widgets/backGround_color.dart';
+import '../widgets/back_ground_color.dart';
 
 class AuthMainView extends StatelessWidget {
   const AuthMainView({super.key});

@@ -19,7 +19,7 @@ class _GenderPickerState extends State<GenderPicker> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Gender', style: Styles.textStyle14,),
+        Text('Gender', style: Styles.textStyle13,),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class _GenderPickerState extends State<GenderPicker> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: ColorResources.deepPink,
+                color: ColorResources.darkMauve,
                 width: 2,
               ),
               color: isSelected ? ColorResources.softWhite : Colors.transparent,
@@ -58,14 +58,14 @@ class _GenderPickerState extends State<GenderPicker> {
                 ? Icon(
               Icons.check,
               size: 10,
-              color: ColorResources.deepPink,
+              color: ColorResources.darkMauve,
             )
                 : null,
           ),
           const SizedBox(width: 8),
           Text(
             gender,
-            style: Styles.textStyle14,
+            style: Styles.textStyle13,
           ),
         ],
       ),

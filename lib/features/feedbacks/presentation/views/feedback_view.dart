@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
 import 'package:mentroverso/core/utils/themes.dart';
-import 'package:mentroverso/features/home/presentation/widgets/custom_app_bar.dart';
-import 'package:mentroverso/features/registration/presentation/widgets/backGround_color.dart';
+import 'package:mentroverso/features/feedbacks/presentation/widgets/feedback_view_body.dart';
 
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 
@@ -20,6 +19,8 @@ class FeedbackView extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            surfaceTintColor: ColorResources.transparentBlack,
+
             backgroundColor: ColorResources.transparentBlack,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -36,6 +37,7 @@ class FeedbackView extends StatelessWidget {
             automaticallyImplyLeading: false,
 
           ),
+          body: FeedBackViewBody(),
         ),
       ],
     );
