@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -7,24 +7,44 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+
   Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null;
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) return null; // User canceled the sign-in
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+    final GoogleSignInAuthentication googleAuth = await googleUser
+        .authentication;
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
 
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
-      return userCredential.user;
-    } catch (e) {
-      debugPrint ("Error signing in with Google: $e");
-      return null;
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(credential);
+    User? user = userCredential.user;
+
+    if (user != null) {
+      // Check if user exists in Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        // Save user data to Firestore if not exists
+        await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
+          'First Name': user.displayName?.split(' ')[0] ?? '',
+          'Last Name': user.displayName?.split(' ')[1] ?? '',
+          'Email': user.email,
+          'Faculty': '',
+          'Gender': '', // Optional, can be updated later
+          'Major' : '',
+        });
+      }
     }
+    return user;
   }
+
 
   Future<void> signOut() async {
     await _googleSignIn.signOut();
@@ -49,6 +69,30 @@ class AuthService {
         final OAuthCredential credential =
         FacebookAuthProvider.credential(accessToken.tokenString);
 
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithCredential(credential);
+        User? user = userCredential.user;
+
+        if (user != null) {
+          // Check if user exists in Firestore
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(user.uid)
+              .get();
+
+          if (!userDoc.exists) {
+            // Save user data to Firestore if not exists
+            await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
+              'First Name': user.displayName?.split(' ')[0] ?? '',
+              'Last Name': user.displayName?.split(' ')[1] ?? '',
+              'Email': user.email,
+              'Faculty': '',
+              'Gender': '', // Optional, can be updated later
+              'Major' : '',
+            });
+          }
+        }
+
         // Sign in to Firebase with the credential
         return await FirebaseAuth.instance.signInWithCredential(credential);
       } else {
@@ -60,5 +104,6 @@ class AuthService {
       return null;
     }
   }
+
 
 }

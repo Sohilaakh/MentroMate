@@ -8,7 +8,8 @@ import 'package:mentroverso/core/utils/auth_service.dart';
 
 
 class IconsRow extends StatelessWidget {
-  const IconsRow({super.key});
+   IconsRow({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,8 @@ class IconsRow extends StatelessWidget {
             }
 
 
+
+
           },
         ),
         const SizedBox(width: 20),
@@ -45,6 +48,7 @@ class IconsRow extends StatelessWidget {
             } else {
               print("Facebook login failed.");
             }
+
           },
         ),
       ],
