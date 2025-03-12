@@ -27,7 +27,6 @@ class IconsRow extends StatelessWidget {
                 GoRouter.of(context).push(AppRouter.kHome);
               }
             } else {
-              print("User sign-in failed".trim());
             }
 
 

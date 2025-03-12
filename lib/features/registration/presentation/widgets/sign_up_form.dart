@@ -12,6 +12,8 @@ class SignUpForm extends StatefulWidget {
   final TextEditingController confirmPasswordController;
   final TextEditingController facultyController;
   final TextEditingController majorController;
+  final Function(String) onGenderSelected;
+
 
   const SignUpForm({
     super.key,
@@ -22,6 +24,8 @@ class SignUpForm extends StatefulWidget {
     required this.confirmPasswordController,
     required this.facultyController,
     required this.majorController,
+    required this.onGenderSelected,
+
   });
 
   @override
@@ -30,10 +34,12 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   bool obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+
         Row(
           children: [
             Expanded(
@@ -76,7 +82,7 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () {
               setState(() {
                 obscurePassword = !obscurePassword;
-              },);
+              });
             },
           ),
         ),
@@ -94,11 +100,9 @@ class _SignUpFormState extends State<SignUpForm> {
               size: 25,
             ),
             onPressed: () {
-              setState(
-                () {
-                  obscurePassword = !obscurePassword;
-                },
-              );
+              setState(() {
+                obscurePassword = !obscurePassword;
+              });
             },
           ),
         ),
@@ -114,9 +118,10 @@ class _SignUpFormState extends State<SignUpForm> {
           validator: (text) => validateField(text, 'Major'),
           controller: widget.majorController,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
+
         GenderPicker(
-          onGenderSelected: (String gender) {},
+          onGenderSelected: widget.onGenderSelected,
         ),
       ],
     );

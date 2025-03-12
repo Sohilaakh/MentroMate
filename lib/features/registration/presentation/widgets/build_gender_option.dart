@@ -12,63 +12,59 @@ class GenderPicker extends StatefulWidget {
 }
 
 class _GenderPickerState extends State<GenderPicker> {
-  String _selectedGender = 'Male';
+  String _selectedGender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Gender', style: Styles.textStyle13,),
+        Text('Gender', style: Styles.textStyle13),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            buildGenderOption('Male'),
+            buildGenderOption(Gender.male, 'Male'),
             const SizedBox(width: 20),
-            buildGenderOption('Female'),
+            buildGenderOption(Gender.female, 'Female'),
           ],
         ),
       ],
     );
   }
 
-  Widget buildGenderOption(String gender) {
+  Widget buildGenderOption(String gender, String label) {
     final isSelected = _selectedGender == gender;
     return GestureDetector(
       onTap: () {
         setState(() {
           _selectedGender = gender;
-          widget.onGenderSelected(gender); // Notify parent widget
+          widget.onGenderSelected(gender);
         });
       },
-      child: Row(
-        children: [
-          Container(
-            height: 15,
-            width: 15,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: ColorResources.darkMauve,
-                width: 2,
-              ),
-              color: isSelected ? ColorResources.softWhite : Colors.transparent,
-            ),
-            child: isSelected
-                ? Icon(
-              Icons.check,
-              size: 10,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+
+        child: Row(
+          children: [
+            Icon(
+              isSelected ? Icons.check_circle : Icons.circle_outlined,
               color: ColorResources.darkMauve,
-            )
-                : null,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            gender,
-            style: Styles.textStyle13,
-          ),
-        ],
+              size: 18,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: Styles.textStyle13,
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class Gender {
+  static const String male = 'male';
+  static const String female = 'female';
 }

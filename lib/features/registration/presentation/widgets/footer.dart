@@ -8,7 +8,7 @@ class Footer extends StatelessWidget {
   final String text1;
   final String text2;
   final String buttonText;
-  final Future<void> Function() buttonAction;
+  final Function() buttonAction;
   final Function() textAction;
 
   const Footer({

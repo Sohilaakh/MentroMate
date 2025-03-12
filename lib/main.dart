@@ -1,29 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/registration/bloc/profile_bloc.dart';
+import 'features/registration/data/repositories/auth_repository_impl.dart';
+import 'features/registration/domain/use_cases/sign_up_use_case.dart';
+import 'features/profile/domain/repositories/user_repository_impl.dart';
+import 'core/utils/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'core/utils/app_routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
- ),
-  );
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MentroVerso());
+  final userRepository = UserRepositoryImpl(FirebaseFirestore.instance);
+  final signUpUseCase = SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance), userRepository);
+
+  runApp(MentroVerso(signUpUseCase: signUpUseCase));
 }
 
 class MentroVerso extends StatelessWidget {
-  const MentroVerso({super.key});
+  final SignUpUseCase signUpUseCase;
+
+  const MentroVerso({super.key, required this.signUpUseCase});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (context) => SignUpBloc(signUpUseCase),
+      child: MaterialApp.router(
+        routerConfig: AppRouter.router,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
