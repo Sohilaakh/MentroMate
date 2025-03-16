@@ -68,7 +68,7 @@ class UpdateProfileViewBody extends StatelessWidget {
           CustomTextFormField(
             text: 'Graduation Year',
             label: '',
-            validator: (String) {
+            validator: (index) {
               return null;
             },
             controller: firstNameController,
@@ -77,7 +77,7 @@ class UpdateProfileViewBody extends StatelessWidget {
           CustomTextFormField(
             text: 'Graduation Status',
             label: '',
-            validator: (String) {
+            validator: (index) {
               return null;
             },
             controller: firstNameController,
