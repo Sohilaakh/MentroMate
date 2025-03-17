@@ -33,12 +33,16 @@ class AuthService {
       if (!userDoc.exists) {
         // Save user data to Firestore if not exists
         await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
-          'First Name': user.displayName?.split(' ')[0] ?? '',
-          'Last Name': user.displayName?.split(' ')[1] ?? '',
-          'Email': user.email,
-          'Faculty': '',
-          'Gender': '', // Optional, can be updated later
-          'Major' : '',
+          'uid' : user.uid,
+          'firstName': user.displayName?.split(' ')[0] ?? '',
+          'lastName': user.displayName?.split(' ')[1] ?? '',
+          'email': user.email,
+          'faculty': '',
+          'gender': '', // Optional, can be updated later
+          'major' : '',
+          'graduationStatus' : '',
+          'graduationYear' : '',
+          'phoneNumber' : user.phoneNumber
         });
       }
     }
@@ -83,12 +87,16 @@ class AuthService {
           if (!userDoc.exists) {
             // Save user data to Firestore if not exists
             await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
-              'First Name': user.displayName?.split(' ')[0] ?? '',
-              'Last Name': user.displayName?.split(' ')[1] ?? '',
-              'Email': user.email,
-              'Faculty': '',
-              'Gender': '', // Optional, can be updated later
-              'Major' : '',
+              'uid' : user.uid,
+              'firstName': user.displayName?.split(' ')[0] ?? '',
+              'lastName': user.displayName?.split(' ')[1] ?? '',
+              'email': user.email,
+              'faculty': '',
+              'gender': '', // Optional, can be updated later
+              'major' : '',
+              'graduationStatus' : '',
+              'graduationYear' : '',
+              'phoneNumber' : user.phoneNumber
             });
           }
         }
