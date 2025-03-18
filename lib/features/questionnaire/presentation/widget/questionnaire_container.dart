@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mentroverso/core/utils/color_resources.dart';
 
-class QuestionContainer extends StatefulWidget {
+import '../../../../core/utils/color_resources.dart';
+
+class QuestionContainer extends StatelessWidget {
   final String question;
   final List<String> options;
+  final String? selectedOption;
   final Function(String) onSelected;
 
   const QuestionContainer({
@@ -11,20 +13,14 @@ class QuestionContainer extends StatefulWidget {
     required this.question,
     required this.options,
     required this.onSelected,
+    this.selectedOption,
   });
-
-  @override
-  State<QuestionContainer> createState() => _QuestionContainerState();
-}
-
-class _QuestionContainerState extends State<QuestionContainer> {
-  String? selectedOption;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: ColorResources.softWhite1,
@@ -34,26 +30,22 @@ class _QuestionContainerState extends State<QuestionContainer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.question
-          ),
-
+          Text(question),
           const SizedBox(height: 10),
-
-          ...widget.options.map((option) {
-            return RadioListTile<String>(
-              title: Text(option, style: const TextStyle(color: Colors.white)),
-              value: option,
-              groupValue: selectedOption,
-              activeColor: Colors.purpleAccent,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value;
-                });
-                widget.onSelected(value!);
-              },
-            );
-          }).toList(),
+          Column(
+            children: options.map((option) {
+              return RadioListTile<String>(
+                title: Text(option),
+                value: option,
+                groupValue: selectedOption, // Pre-select correct answer if applicable
+                onChanged: (value) {
+                  if (selectedOption == null) { // Prevent changes after score is shown
+                    onSelected(value!);
+                  }
+                },
+              );
+            }).toList(),
+          ),
         ],
       ),
     );
