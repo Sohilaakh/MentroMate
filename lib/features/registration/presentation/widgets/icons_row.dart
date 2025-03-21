@@ -8,7 +8,7 @@ import 'package:mentroverso/core/utils/auth_service.dart';
 
 
 class IconsRow extends StatelessWidget {
-   IconsRow({super.key});
+   const IconsRow({super.key});
 
 
   @override

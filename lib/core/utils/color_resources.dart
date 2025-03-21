@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class ColorResources {
 
+  static Color get mauve => const Color(0xCCC4609C);
+
   static Color get darkMauve => const Color(0xFF76335C);
 
   static Color get softWhite => const Color(0xFFF7E9F2);

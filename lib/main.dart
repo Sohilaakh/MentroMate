@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/questionnaire/data/repositories/question_repository_impl.dart';
+import 'features/questionnaire/domain/use_cases/get_questions_by_kpi.dart';
+import 'features/questionnaire/presentation/bloc/question_bloc.dart';
 import 'features/registration/bloc/profile_bloc.dart';
 import 'features/registration/data/repositories/auth_repository_impl.dart';
 import 'features/registration/domain/use_cases/sign_up_use_case.dart';
@@ -14,19 +17,29 @@ Future<void> main() async {
   await Firebase.initializeApp();
   final userRepository = UserRepositoryImpl(FirebaseFirestore.instance);
   final signUpUseCase = SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance), userRepository);
+  final questionRepository = QuestionRepositoryImpl(FirebaseFirestore.instance);
+  final getQuestionsByKPI = GetQuestionsByKPI(questionRepository);
 
-  runApp(MentroVerso(signUpUseCase: signUpUseCase));
+  runApp(MentroVerso(signUpUseCase: signUpUseCase, getQuestionsByKPI: getQuestionsByKPI,));
 }
 
 class MentroVerso extends StatelessWidget {
   final SignUpUseCase signUpUseCase;
+  final GetQuestionsByKPI getQuestionsByKPI;
 
-  const MentroVerso({super.key, required this.signUpUseCase});
+  const MentroVerso({super.key, required this.signUpUseCase, required this.getQuestionsByKPI});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignUpBloc(signUpUseCase),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => QuestionBloc(getQuestionsByKPI),
+        ),
+        BlocProvider(
+          create: (_) => SignUpBloc(signUpUseCase), // Example of another bloc
+        ),
+      ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,

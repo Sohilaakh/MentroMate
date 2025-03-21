@@ -3,12 +3,10 @@ import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
 import 'package:mentroverso/features/questionnaire/presentation/views/Questionnaire_view.dart';
-import 'package:mentroverso/features/registration/presentation/views/auth_main_view.dart';
 import '../../features/chatbot/presentation/views/chatbot_view.dart';
 import '../../features/interview/presentation/views/interview_view.dart';
 import '../../features/meeting/presentation/views/meeting_view.dart';
 import '../../features/profile/presentation/views/edit_profile.dart';
-import '../../features/questionnaire/presentation/views/Questionnaire_view.dart';
 import '../../features/registration/presentation/views/log_in_view.dart';
 import '../../features/registration/presentation/views/sign_up_view.dart';
 
