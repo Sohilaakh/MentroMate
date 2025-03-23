@@ -8,6 +8,8 @@ import '../../domain/entities/question.dart';
 import 'questionnaire_button.dart';
 
 class QuestionListView extends StatefulWidget {
+  const QuestionListView({super.key});
+
   @override
   _QuestionListViewState createState() => _QuestionListViewState();
 }

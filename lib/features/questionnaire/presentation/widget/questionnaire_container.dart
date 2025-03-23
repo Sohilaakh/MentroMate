@@ -12,14 +12,14 @@ class QuestionContainer extends StatelessWidget {
   final String correctAnswer;
 
   const QuestionContainer({
-    Key? key,
+    super.key,
     required this.question,
     required this.options,
     required this.onSelected,
     this.selectedOption,
     this.showCorrectAnswer = false, // Default to false
     required this.correctAnswer, // Ensure this is required
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
