@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentroverso/features/questionnaire/presentation/bloc/question_bloc.dart';
-import 'package:mentroverso/features/questionnaire/presentation/bloc/question_event.dart';
-import 'package:mentroverso/features/questionnaire/presentation/bloc/question_state.dart';
+import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_button.dart';
 import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_container.dart';
+
 import '../../domain/entities/question.dart';
-import 'questionnaire_button.dart';
+import '../bloc/question_bloc.dart';
+import '../bloc/question_event.dart';
+import '../bloc/question_state.dart';
+
 
 class QuestionListView extends StatefulWidget {
   const QuestionListView({super.key});
@@ -89,9 +91,12 @@ class _QuestionListViewState extends State<QuestionListView> {
                     },
                   ),
                 ),
-                QuestionnaireButton(
-                  userResponses: userResponses,
-                  submitAnswers: () => _submitAnswers(questions), questions: [],
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: QuestionnaireButton(
+                    userResponses: userResponses,
+                    submitAnswers: () => _submitAnswers(questions), questions: [],
+                  ),
                 ),
               ],
             ),

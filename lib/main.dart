@@ -37,7 +37,7 @@ class MentroVerso extends StatelessWidget {
           create: (_) => QuestionBloc(getQuestionsByKPI),
         ),
         BlocProvider(
-          create: (_) => SignUpBloc(signUpUseCase), // Example of another bloc
+          create: (_) => SignUpBloc(signUpUseCase),
         ),
       ],
       child: MaterialApp.router(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/widgets/custom_app_bar.dart';
-import 'package:mentroverso/features/registration/presentation/widgets/back_ground_color.dart';
-
+import '../../../../core/utils/app_routes.dart';
+import '../../../../core/utils/color_resources.dart';
+import '../../../../core/utils/themes.dart';
+import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 import '../widget/chatbot_view_body.dart';
+import '../widget/drawer.dart';
 
 class ChatbotView extends StatelessWidget {
   const ChatbotView({super.key});
@@ -11,14 +15,25 @@ class ChatbotView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackGroundColor(),
+        LinearGradientBackGroundColor(
+          beginColor: Alignment.bottomLeft,
+          endColor: Alignment.topRight,
+        ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: CustomAppBar(
-            title: 'Chatbot',
-            icon: (Icons.menu )
+          appBar: AppBar(
+            backgroundColor: ColorResources.darkTransparentGray,
+            elevation: 0,
+            foregroundColor: Colors.white,
+            centerTitle: true,
+            title: Text(
+              'Chatbot',
+              style: Styles.textStyle18,
+            ),
           ),
+          drawer: ChatDrawer(),
           body: ChatbotViewBody(),
+
         ),
       ],
     );

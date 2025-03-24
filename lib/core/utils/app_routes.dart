@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:mentroverso/features/chatbot/presentation/widget/drawer.dart';
 import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.dart';
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
@@ -23,11 +24,16 @@ abstract class AppRouter {
   static const kChatbotView = '/kChatbotView';
   static const kQuestionnaireView = '/kQuestionnaireView';
   static const kTestPage = '/kTestPage';
+  static const kChatDrawer = '/kChatDrawer';
 
   //GoRouter.of(context).push(AppRouter.kLogIn);
 
   static final router = GoRouter(
     routes: [
+      GoRoute(
+        path: kChatDrawer,
+        builder: (context, state) => const ChatDrawer(),
+      ),
       GoRoute(
         path: kLogIn,
         builder: (context, state) => const LogIn(),
@@ -42,7 +48,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: '/',
-        builder: (context, state) => const QuestionnaireView(),
+        builder: (context, state) => const ChatbotView(),
       ),
       GoRoute(
         path: kSignUp,
