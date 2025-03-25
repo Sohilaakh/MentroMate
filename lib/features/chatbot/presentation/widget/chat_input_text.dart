@@ -25,13 +25,13 @@ class ChatInputBox extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(Icons.attach_file, color: Colors.white),
-            onPressed: onAttach,
+            onPressed: onAttach, // Trigger file picker
           ),
           Expanded(
             child: TextField(
               controller: messageController,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
                 hintText: "Message....",
                 hintStyle: TextStyle(color: Colors.white54),
                 border: InputBorder.none,
@@ -39,11 +39,8 @@ class ChatInputBox extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(
-              Icons.send,
-              color: Colors.white,
-            ),
-            onPressed: onSend,
+            icon: const Icon(Icons.send, color: Colors.white),
+            onPressed: onSend, // Send message
           ),
         ],
       ),

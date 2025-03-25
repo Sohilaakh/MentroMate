@@ -1,39 +1,173 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-
+import 'dart:async';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:mentroverso/features/chatbot/presentation/widget/deep_seek.dart';
 import 'chat_bubble.dart';
 import 'chat_input_text.dart';
 
-class ChatbotViewBody extends StatelessWidget {
-  final TextEditingController _messageController = TextEditingController();
+class ChatbotViewBody extends StatefulWidget {
+  const ChatbotViewBody({super.key});
 
-  ChatbotViewBody({super.key});
+  @override
+  _ChatbotViewBodyState createState() => _ChatbotViewBodyState();
+}
+
+class _ChatbotViewBodyState extends State<ChatbotViewBody> {
+  final TextEditingController _messageController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final List<Map<String, dynamic>> _messages = []; // Stores messages
+  final DeepSeekService _deepSeekService = DeepSeekService();
+  bool _isTyping = false; // To show typing indicator
+
+  void _sendMessage() {
+    String userMessage = _messageController.text.trim();
+    if (userMessage.isEmpty) return;
+
+    setState(() {
+      _messages.add({"text": userMessage, "isSentByUser": true});
+      _isTyping = true;
+    });
+
+    _messageController.clear();
+    _scrollToBottom();
+
+    // Placeholder for the bot response
+    int botMessageIndex = _messages.length;
+    _messages.add({"text": "", "isSentByUser": false});
+
+    String botResponse = "";
+
+    _deepSeekService.streamResponse(userMessage).listen((chunk) {
+      setState(() {
+        botResponse += chunk;
+        _messages[botMessageIndex]["text"] = botResponse;
+      });
+      _scrollToBottom();
+    }, onDone: () {
+      setState(() {
+        _isTyping = false;
+      });
+      _scrollToBottom();
+    }, onError: (error) {
+      setState(() {
+        _messages[botMessageIndex]["text"] = "Error: $error";
+        _isTyping = false;
+      });
+      _scrollToBottom();
+    });
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  void _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      PlatformFile pickedFile = result.files.single;
+
+      setState(() {
+        _messages.add({
+          "text": pickedFile.name, // Show only file name
+          "isSentByUser": true,
+          "isFile": true, // Flag to differentiate file messages
+        });
+        _isTyping = true; // Show progress indicator
+      });
+
+      File file = File(pickedFile.path!);
+      String fileContent = await file.readAsString();
+
+
+      _analyzeFile(fileContent);
+    }
+  }
+
+
+  Future<String> _readFileContent(File file) async {
+    try {
+      return await file.readAsString();
+    } catch (e) {
+      return "Error reading file: $e";
+    }
+  }
+
+  void _analyzeFile(String content) {
+    _deepSeekService.analyzeFile(content).then((response) {
+      setState(() {
+        _messages.add({
+          "text": response,
+          "isSentByUser": false,
+        });
+        _isTyping = false;
+      });
+      _scrollToBottom();
+    }).catchError((error) {
+      setState(() {
+        _messages.add({
+          "text": "Error: $error",
+          "isSentByUser": false,
+        });
+        _isTyping = false;
+      });
+      _scrollToBottom();
+    });
+  }
+
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ChatBubble(message: "Hello!", isSentByUser: false),
-          ChatBubble(message: "Hi! How are you?", isSentByUser: true),
-          ChatInputBox(
-            messageController: _messageController,
-            onSend: () {
-              if (kDebugMode) {
-                print("Message Sent: ${_messageController.text}");
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            controller: _scrollController,
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+            itemCount: _messages.length + (_isTyping ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (_isTyping && index == _messages.length) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: CircularProgressIndicator(color: Colors.tealAccent),
+                  ),
+                );
               }
-              _messageController.clear();
-            },
-            onAttach: () {
-              if (kDebugMode) {
-                print("Attachment Button Clicked");
-              }
+
+              final message = _messages[index];
+              return ChatBubble(
+                message: message["text"],
+                isSentByUser: message["isSentByUser"],
+                isFile: message["isFile"] ?? false, // Pass file flag
+              );
             },
           ),
-        ],
-      ),
+        ),
+
+        ChatInputBox(
+          messageController: _messageController,
+          onSend: _sendMessage,
+          onAttach: _pickFile, // Call _pickFile when attachment button is clicked
+        ),
+      ],
     );
   }
 }
