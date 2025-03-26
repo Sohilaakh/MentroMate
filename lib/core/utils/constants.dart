@@ -10,5 +10,5 @@ abstract class Constant {
     return MediaQuery.of(context).size.height;
   }
 
- static const  String apiKey = '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';
+ static const  String apiKey = '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';
 }

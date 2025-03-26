@@ -10,6 +10,8 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool showCorrectAnswers = false;
+    List<String> suggestedCourses = [];
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,7 +25,7 @@ class HomeViewBody extends StatelessWidget {
             title: 'Questionnaire',
             description: 'Discover your strengths and interests.',
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kQuestionnaireView);
+              GoRouter.of(context).push(AppRouter.kQuestionnaireView,extra:showCorrectAnswers );
 
             },
           ),
@@ -34,7 +36,7 @@ class HomeViewBody extends StatelessWidget {
             title: 'Chatbot',
             description: 'Get instant AI guidance',
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kChatbotView);
+              GoRouter.of(context).push(AppRouter.kChatbotView, extra: suggestedCourses);
 
             },
           ),

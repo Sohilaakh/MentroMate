@@ -6,7 +6,8 @@ import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 import '../widget/questionnaire_view_body.dart';
 
 class QuestionnaireView extends StatelessWidget {
-  const QuestionnaireView({super.key});
+  bool showCorrectAnswers;
+  QuestionnaireView({super.key, required this.showCorrectAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class QuestionnaireView extends StatelessWidget {
               GoRouter.of(context).pop(AppRouter.kHome);
             },
           ),
-          body: QuestionnaireViewBody()),
+          body: QuestionnaireViewBody(showCorrectAnswers: showCorrectAnswers,)),
     ]);
   }
 }

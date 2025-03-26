@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mentroverso/core/utils/app_routes.dart';
 import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_button.dart';
 import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_container.dart';
 
@@ -10,7 +12,8 @@ import '../bloc/question_state.dart';
 
 
 class QuestionListView extends StatefulWidget {
-  const QuestionListView({super.key});
+  bool showCorrectAnswers = true;
+   QuestionListView({super.key, required this.showCorrectAnswers});
 
   @override
   _QuestionListViewState createState() => _QuestionListViewState();
@@ -18,7 +21,8 @@ class QuestionListView extends StatefulWidget {
 
 class _QuestionListViewState extends State<QuestionListView> {
   Map<int, String> userResponses = {};
-  bool showCorrectAnswers = false;
+  List<String> _wrongCourses = [];
+
 
   @override
   void initState() {
@@ -26,37 +30,74 @@ class _QuestionListViewState extends State<QuestionListView> {
     context.read<QuestionBloc>().add(LoadQuestions());
   }
 
+  // void _submitAnswers(List<Question> questions) {
+  //   print("Submit button pressed!");
+  //   int correctAnswers = 0;
+  //
+  //
+  //   for (int i = 0; i < questions.length; i++) {
+  //     if (userResponses[i] == questions[i].correctAnswer) {
+  //       correctAnswers++;
+  //     }
+  //   }
+  //
+  //   double score = (correctAnswers / questions.length) * 100;
+  //
+  //
+  //   // Navigator.pushNamed(context, 'mentroverso/features/questionnaire/views/score_page',
+  //   // arguments: {
+  //   //   'score' : score
+  //   // }
+  //   // );
+  //   // GoRouter.of(context).push(AppRouter.kScore,extra: score);
+  //   context.push(AppRouter.kScore, extra: score);
+  //
+  //
+  //   // showDialog(
+  //   //   context: context,
+  //   //   builder: (context) => AlertDialog(
+  //   //     title: const Text("Quiz Completed"),
+  //   //     content: Text("Your Score: ${score.toStringAsFixed(2)}%"),
+  //   //     actions: [
+  //   //       TextButton(
+  //   //         onPressed: () {
+  //   //           setState(() {
+  //   //             showCorrectAnswers = true;
+  //   //           });
+  //   //           Navigator.pop(context);
+  //   //         },
+  //   //         child: const Text("View Correct Answers"),
+  //   //       ),
+  //   //     ],
+  //   //   ),
+  //   // );
+  // }
   void _submitAnswers(List<Question> questions) {
     print("Submit button pressed!");
     int correctAnswers = 0;
+    List<String> suggestedCourses = []; // ✅ Store courses
 
     for (int i = 0; i < questions.length; i++) {
       if (userResponses[i] == questions[i].correctAnswer) {
         correctAnswers++;
+      } else {
+        suggestedCourses.add(questions[i].relatedCourse); // ✅ Store wrong answer's course
       }
     }
 
     double score = (correctAnswers / questions.length) * 100;
 
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Quiz Completed"),
-        content: Text("Your Score: ${score.toStringAsFixed(2)}%"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              setState(() {
-                showCorrectAnswers = true;
-              });
-              Navigator.pop(context);
-            },
-            child: const Text("View Correct Answers"),
-          ),
-        ],
-      ),
+    context.push(
+      AppRouter.kScore,
+      extra: {
+        'score': score,
+        'suggestedCourses': suggestedCourses, // ✅ Pass courses
+      },
     );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +120,13 @@ class _QuestionListViewState extends State<QuestionListView> {
                         options: questions[index].options,
                         selectedOption: userResponses[index],
                         onSelected: (selectedOption) {
-                          if (!showCorrectAnswers) {
+                          if (!widget.showCorrectAnswers) {
                             setState(() {
                               userResponses[index] = selectedOption;
                             });
                           }
                         },
-                        showCorrectAnswer: showCorrectAnswers,
+                        showCorrectAnswer: widget.showCorrectAnswers,
                         correctAnswer: questions[index].correctAnswer,
                       );
                     },

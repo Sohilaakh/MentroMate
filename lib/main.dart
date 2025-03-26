@@ -44,6 +44,7 @@ class MentroVerso extends StatelessWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
       ),
+
     );
   }
 }

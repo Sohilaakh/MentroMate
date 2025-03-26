@@ -1,10 +1,11 @@
-import 'package:mentroverso/features/questionnaire/domain/entities/question.dart';
+import '../../domain/entities/question.dart';
 
 class QuestionModel extends Question {
   QuestionModel({
     required super.question,
     required super.options,
     required super.correctAnswer,
+    required super.relatedCourse, // Include the new field
   });
 
   // Convert Firestore data (Map) to a QuestionModel
@@ -13,6 +14,7 @@ class QuestionModel extends Question {
       question: map['question'] ?? '',
       options: List<String>.from(map['possible answers'] ?? []),
       correctAnswer: map['correct answer'] ?? '',
+      relatedCourse: map['course'] ?? '', // Ensure this key exists in Firestore
     );
   }
 
@@ -22,6 +24,7 @@ class QuestionModel extends Question {
       'question': question,
       'possible answers': options,
       'correct answer': correctAnswer,
+      'course': relatedCourse,
     };
   }
 }
