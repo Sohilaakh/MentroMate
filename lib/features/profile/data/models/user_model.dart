@@ -9,6 +9,7 @@ class UserModel {
   final String phoneNumber;
   final String graduationYear;
   final String graduationStatus;
+  final String profileImage; // ✅ جديد
 
   UserModel({
     required this.uid,
@@ -21,9 +22,9 @@ class UserModel {
     required this.phoneNumber,
     required this.graduationYear,
     required this.graduationStatus,
+    this.profileImage = '', // ✅ default value
   });
 
-  // Convert UserModel to Map for Firestore
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
@@ -36,10 +37,10 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'graduationYear': graduationYear,
       'graduationStatus': graduationStatus,
+      'profileImage': profileImage,
     };
   }
 
-  // Convert Firestore Map to UserModel
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map['uid'] ?? '',
@@ -52,6 +53,7 @@ class UserModel {
       phoneNumber: map['phoneNumber'] ?? '',
       graduationYear: map['graduationYear'] ?? '',
       graduationStatus: map['graduationStatus'] ?? '',
+      profileImage: map['profileImage'] ?? '', // ✅ هنا
     );
   }
 }

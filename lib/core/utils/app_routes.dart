@@ -9,7 +9,7 @@ import 'package:mentroverso/features/questionnaire/presentation/widget/list_view
 import '../../features/chatbot/presentation/views/chatbot_view.dart';
 import '../../features/interview/presentation/views/interview_view.dart';
 import '../../features/meeting/presentation/views/meeting_view.dart';
-import '../../features/profile/presentation/views/edit_profile.dart';
+import '../../features/profile/presentation/views/update_profile_view.dart';
 import '../../features/registration/presentation/views/log_in_view.dart';
 import '../../features/registration/presentation/views/sign_up_view.dart';
 

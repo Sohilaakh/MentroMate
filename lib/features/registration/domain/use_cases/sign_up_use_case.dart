@@ -19,6 +19,7 @@ class SignUpUseCase {
     String phoneNumber = '',
     String graduationYear = '',
     String graduationStatus = '',
+    String profileImage = ''
   }) async {
     try {
       // Sign up the user using Firebase Authentication
@@ -38,6 +39,8 @@ class SignUpUseCase {
           phoneNumber: phoneNumber,
           graduationYear: graduationYear,
           graduationStatus: graduationStatus,
+          profileImage: profileImage,
+
         );
 
         // Save user data to Firestore
