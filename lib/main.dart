@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'features/profile/bloc/profile_bloc.dart';
 import 'features/profile/bloc/profile_event.dart';
-import 'features/profile/presentation/views/profile_view.dart';
 import 'features/questionnaire/data/repositories/question_repository_impl.dart';
 import 'features/questionnaire/domain/use_cases/get_questions_by_kpi.dart';
 import 'features/questionnaire/presentation/bloc/question_bloc.dart';
@@ -24,17 +24,29 @@ Future<void> main() async {
   final questionRepository = QuestionRepositoryImpl(FirebaseFirestore.instance);
   final getQuestionsByKPI = GetQuestionsByKPI(questionRepository);
 
-  runApp(MentroVerso(signUpUseCase: signUpUseCase, getQuestionsByKPI: getQuestionsByKPI));
+  runApp(MentroVerso(
+    signUpUseCase: signUpUseCase,
+    getQuestionsByKPI: getQuestionsByKPI,
+    userRepository: userRepository,
+  ));
 }
 
 class MentroVerso extends StatelessWidget {
   final SignUpUseCase signUpUseCase;
   final GetQuestionsByKPI getQuestionsByKPI;
+  final UserRepositoryImpl userRepository;
 
-  const MentroVerso({super.key, required this.signUpUseCase, required this.getQuestionsByKPI});
+  const MentroVerso({
+    super.key,
+    required this.signUpUseCase,
+    required this.getQuestionsByKPI,
+    required this.userRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -43,7 +55,15 @@ class MentroVerso extends StatelessWidget {
         BlocProvider(
           create: (_) => SignUpBloc(signUpUseCase),
         ),
-
+        BlocProvider(
+          create: (_) {
+            final profileBloc = ProfileBloc(userRepository);
+            if (uid != null) {
+              profileBloc.add(LoadUserProfile(uid));
+            }
+            return profileBloc;
+          },
+        ),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

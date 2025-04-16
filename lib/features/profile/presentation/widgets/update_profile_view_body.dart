@@ -35,10 +35,8 @@ class _UpdateProfileViewBodyState extends State<UpdateProfileViewBody> {
     phoneController = TextEditingController(text: widget.user.phoneNumber);
     facultyController = TextEditingController(text: widget.user.faculty);
     majorController = TextEditingController(text: widget.user.major);
-    graduationYearController =
-        TextEditingController(text: widget.user.graduationYear);
-    graduationStatusController =
-        TextEditingController(text: widget.user.graduationStatus);
+    graduationYearController = TextEditingController(text: widget.user.graduationYear);
+    graduationStatusController = TextEditingController(text: widget.user.graduationStatus);
   }
 
   @override
@@ -47,108 +45,97 @@ class _UpdateProfileViewBodyState extends State<UpdateProfileViewBody> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          ProfileAvatar(
-            currentImageUrl: widget.user.profileImage,
-            isEditable: true,
-            onEdit: () {
-              // show image picker here
-            },
-          ),
+          ProfileAvatar(),
           const SizedBox(height: 30),
+
           CustomTextFormField(
             text: 'First Name',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: firstNameController,
           ),
           CustomTextFormField(
             text: 'Last Name',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: lastNameController,
           ),
           CustomTextFormField(
             text: 'Email',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: emailController,
           ),
           CustomTextFormField(
             text: 'Phone no',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: phoneController,
           ),
           CustomTextFormField(
             text: 'Faculty',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: facultyController,
           ),
           CustomTextFormField(
             text: 'Major',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: majorController,
           ),
           CustomTextFormField(
             text: 'Graduation Year',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: graduationYearController,
           ),
           CustomTextFormField(
             text: 'Graduation Status',
             label: '',
             color: ColorResources.lightTransparentGray,
-            validator: (String? value) => null,
+            validator: (value) => null,
             controller: graduationStatusController,
           ),
+
           const SizedBox(height: 20),
-          Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: ElevatedButton(
-              onPressed: () {
-                context.read<ProfileBloc>().add(UpdateUserProfile(
-                      widget.user.uid,
-                      {
-                        'firstName': firstNameController.text.trim(),
-                        'lastName': lastNameController.text.trim(),
-                        'email': emailController.text.trim(),
-                        'phoneNumber': phoneController.text.trim(),
-                        'faculty': facultyController.text.trim(),
-                        'major': majorController.text.trim(),
-                        'graduationYear': graduationYearController.text.trim(),
-                        'graduationStatus':
-                            graduationStatusController.text.trim(),
-                      },
-                    ));
+          ElevatedButton(
+            onPressed: () {
+              context.read<ProfileBloc>().add(UpdateUserProfile(
+                widget.user.uid,
+                {
+                  'firstName': firstNameController.text.trim(),
+                  'lastName': lastNameController.text.trim(),
+                  'email': emailController.text.trim(),
+                  'phoneNumber': phoneController.text.trim(),
+                  'faculty': facultyController.text.trim(),
+                  'major': majorController.text.trim(),
+                  'graduationYear': graduationYearController.text.trim(),
+                  'graduationStatus': graduationStatusController.text.trim(),
+                },
+              ));
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Profile updated successfully'),
-
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Profile updated successfully'),
                 ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('Save Changes'),
             ),
-          )
+            child: const Text('Save Changes'),
+          ),
         ],
       ),
     );
