@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mentroverso/core/utils/color_resources.dart';
-import 'package:mentroverso/core/utils/themes.dart';
+
+import '../utils/color_resources.dart';
+import '../utils/themes.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String text;
@@ -10,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final Color? color;
+  final Color? textColor;
   final Widget? suffixIcon;
   final IconData? icon;
 
@@ -23,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.suffixIcon,
     this.color,
+    this.textColor,
     this.keyboardType = TextInputType.text,
   });
 
@@ -39,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            style: TextStyle(color: textColor ?? Colors.white),
             obscureText: obscureText,
             cursorHeight: 15,
             cursorColor: ColorResources.neutralGray,
