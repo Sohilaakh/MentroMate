@@ -57,14 +57,14 @@ abstract class AppRouter {
         path: kTestPage,
         builder: (context, state) {
           final bool showCorrectAnswers = state.extra as bool;
-          return QuestionnaireView(showCorrectAnswers:showCorrectAnswers ,);
+          return QuestionnaireView(showCorrectAnswers: showCorrectAnswers,);
         },
       ),
       GoRoute(
         path: kQuestionnaireView,
         builder: (context, state) {
           final bool showCorrectAnswers = state.extra as bool;
-          return QuestionnaireView(showCorrectAnswers:showCorrectAnswers ,);
+          return QuestionnaireView(showCorrectAnswers: showCorrectAnswers,);
         },
       ),
       GoRoute(

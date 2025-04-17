@@ -22,12 +22,14 @@ class Question {
   final List<String> options;
   final String correctAnswer;
   final String relatedCourse; // New field for course name
+  final String kpi;
 
   Question({
     required this.question,
     required this.options,
     required this.correctAnswer,
-    required this.relatedCourse, // Add to constructor
+    required this.relatedCourse,
+    required this.kpi// Add to constructor
   });
 
   // Convert Firestore data (Map) to a Question instance
@@ -36,7 +38,9 @@ class Question {
       question: map['question'] ?? '',
       options: List<String>.from(map['possible answers'] ?? []),
       correctAnswer: map['correct answer'] ?? '',
-      relatedCourse: map['course'] ?? '', // Ensure this key exists in Firestore
+      relatedCourse: map['course'] ?? '',
+      kpi: map['kpi'] ?? ''
+      // Ensure this key exists in Firestore
     );
   }
 
@@ -46,7 +50,8 @@ class Question {
       'question': question,
       'possible answers': options,
       'correct answer': correctAnswer,
-      'course': relatedCourse, // Include related course in Firestore
+      'course': relatedCourse,
+      'kpi' : kpi,// Include related course in Firestore
     };
   }
 }

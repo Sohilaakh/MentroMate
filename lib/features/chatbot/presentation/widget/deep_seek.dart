@@ -89,12 +89,13 @@
 
 
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:mentroverso/core/utils/constants.dart';
 
 class DeepSeekService {
-  final String apiKey = Constant.apiKey;
+  final String apiKey = dotenv.env['API_KEY'] ?? 'fallback_key_or_error';
   final String apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
   Stream<String> streamResponse(String prompt) async* {
@@ -173,40 +174,108 @@ class DeepSeekService {
   }
 
   /// 🔹 **Generate Suggested Courses Message**
-  Future<String> generateSuggestedCoursesMessage(List<String> courses) async {
-    if (courses.isEmpty) return "I couldn't find any course recommendations.";
+  // Future<String> generateSuggestedCoursesMessage(List<String> courses) async {
+  //   if (courses.isEmpty) return "I couldn't find any course recommendations.";
+  //
+  //   final String prompt = """
+  // You are a helpful AI assistant. provide the user links to help them improve in the following courses:
+  //
+  // ${courses.map((course) => "- $course").join("\n")}
+  //
+  // Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
+  // """;
+  //
+  //   final response = await http.post(
+  //     Uri.parse(apiUrl),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $apiKey',
+  //     },
+  //     body: jsonEncode({
+  //       "model": "deepseek/deepseek-chat:free",
+  //       "messages": [
+  //         {"role": "user", "content": prompt}
+  //       ],
+  //     }),
+  //   );
+  //
+  //   if (response.statusCode == 200) {
+  //     final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+  //     String result = jsonResponse["choices"][0]["message"]["content"] ?? "No response";
+  //
+  //     return _formatResponse(result);
+  //   } else {
+  //     throw Exception('⚠️ Failed to generate suggested courses message');
+  //   }
+  // }
+
+  Stream<String> generateSuggestedCoursesMessage(List<String> courses) async* {
+    if (courses.isEmpty) {
+      yield "I couldn't find any course recommendations.";
+      return;
+    }
 
     final String prompt = """
-  You are a helpful AI assistant. provide the user links to help them improve in the following courses:
-  
-  ${courses.map((course) => "- $course").join("\n")}
-  
-  Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
-  """;
+You are a helpful AI assistant. Provide the user with links and make sure the links are clickable to help them improve in the following recommended courses:
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
+${courses.map((course) => "- $course").join("\n")}
+
+Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
+""";
+
+    final request = http.Request('POST', Uri.parse(apiUrl))
+      ..headers.addAll({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $apiKey',
-      },
-      body: jsonEncode({
+        'Accept': 'text/event-stream', // Important for streaming
+      })
+      ..body = jsonEncode({
         "model": "deepseek/deepseek-chat:free",
         "messages": [
           {"role": "user", "content": prompt}
         ],
-      }),
-    );
+        "stream": true,
+      });
+
+    final response = await http.Client().send(request);
 
     if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
-      String result = jsonResponse["choices"][0]["message"]["content"] ?? "No response";
+      final stream = response.stream
+          .transform(utf8.decoder)
+          .transform(const LineSplitter());
 
-      return _formatResponse(result);
+      await for (var line in stream) {
+        line = line.trim();
+
+        if (line.isEmpty || line.startsWith(":")) {
+          continue; // Skip empty lines or comments like ': OPENROUTER PROCESSING'
+        }
+
+        if (line.startsWith("data: ")) {
+          final jsonString = line.substring(6).trim();
+
+          if (jsonString == "[DONE]") break;
+
+          try {
+            final jsonResponse = jsonDecode(jsonString);
+            final content = jsonResponse["choices"]?[0]?["delta"]?["content"] ?? "";
+
+            if (content.isNotEmpty) {
+              yield content;
+            }
+          } catch (e) {
+            print("JSON Parsing Error: $e\nRaw line: $line");
+          }
+        }
+      }
     } else {
-      throw Exception('⚠️ Failed to generate suggested courses message');
+      final errorBody = await response.stream.bytesToString();
+      yield '⚠️ Error: ${response.statusCode} - $errorBody';
     }
   }
+
+
+
 
 
   /// Formats the AI response into a structured output

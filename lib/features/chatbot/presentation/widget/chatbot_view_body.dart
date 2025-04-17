@@ -206,30 +206,62 @@ class _ChatbotViewBodyState extends State<ChatbotViewBody> {
   }
 
   /// ✅ **Send Suggested Courses as Clickable Links**
+  // void _sendSuggestedCoursesMessage() {
+  //   if (widget.suggestedCourses.isNotEmpty) {
+  //     setState(() {
+  //       _isTyping = true;
+  //     });
+  //
+  //     _deepSeekService.generateSuggestedCoursesMessage(widget.suggestedCourses).then((message) {
+  //       setState(() {
+  //         _messages.add({
+  //           "text": _formatMessage(message),
+  //           "isSentByUser": false,
+  //         });
+  //         _isTyping = false;
+  //       });
+  //       _scrollToBottom();
+  //     }).catchError((error) {
+  //       setState(() {
+  //         _messages.add({"text": "❌ Error: $error", "isSentByUser": false});
+  //         _isTyping = false;
+  //       });
+  //       _scrollToBottom();
+  //     });
+  //   }
+  // }
   void _sendSuggestedCoursesMessage() {
     if (widget.suggestedCourses.isNotEmpty) {
       setState(() {
         _isTyping = true;
+        _messages.add({"text": "", "isSentByUser": false});
       });
 
-      _deepSeekService.generateSuggestedCoursesMessage(widget.suggestedCourses).then((message) {
+      int botMessageIndex = _messages.length - 1;
+      String botResponse = "";
+
+      _deepSeekService.generateSuggestedCoursesMessage(widget.suggestedCourses).listen((chunk) {
         setState(() {
-          _messages.add({
-            "text": _formatMessage(message),
-            "isSentByUser": false,
-          });
+          botResponse += chunk;
+          _messages[botMessageIndex]["text"] = botResponse;
+        });
+        _scrollToBottom();
+      }, onDone: () {
+        setState(() {
           _isTyping = false;
         });
         _scrollToBottom();
-      }).catchError((error) {
+      }, onError: (error) {
         setState(() {
-          _messages.add({"text": "❌ Error: $error", "isSentByUser": false});
+          _messages[botMessageIndex]["text"] = "Error: $error";
           _isTyping = false;
         });
         _scrollToBottom();
       });
     }
   }
+
+
 
   /// ✨ **Send User Message and Stream AI Response**
   void _sendMessage() {

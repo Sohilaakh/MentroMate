@@ -10,6 +10,7 @@ class QuestionContainer extends StatelessWidget {
   final Function(String) onSelected;
   final bool showCorrectAnswer;
   final String correctAnswer;
+  final  bool isDisabled;
 
   const QuestionContainer({
     super.key,
@@ -18,7 +19,8 @@ class QuestionContainer extends StatelessWidget {
     required this.onSelected,
     this.selectedOption,
     this.showCorrectAnswer = false, // Default to false
-    required this.correctAnswer, // Ensure this is required
+    required this.correctAnswer,
+     this.isDisabled = false, // Ensure this is required
   });
 
   @override

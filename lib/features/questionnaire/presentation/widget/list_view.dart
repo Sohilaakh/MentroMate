@@ -24,6 +24,7 @@ class _QuestionListViewState extends State<QuestionListView> {
   List<String> _wrongCourses = [];
 
 
+
   @override
   void initState() {
     super.initState();
@@ -87,11 +88,13 @@ class _QuestionListViewState extends State<QuestionListView> {
 
     double score = (correctAnswers / questions.length) * 100;
 
+
     context.push(
       AppRouter.kScore,
       extra: {
         'score': score,
-        'suggestedCourses': suggestedCourses, // ✅ Pass courses
+        'suggestedCourses': suggestedCourses,
+        // ✅ Pass courses
       },
     );
   }
@@ -149,3 +152,5 @@ class _QuestionListViewState extends State<QuestionListView> {
     );
   }
 }
+
+

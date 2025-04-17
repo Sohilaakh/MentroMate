@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class Constant {
 
@@ -9,6 +10,4 @@ abstract class Constant {
   static double getHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
-
- static const  String apiKey = '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';
 }

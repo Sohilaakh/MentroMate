@@ -5,7 +5,8 @@ class QuestionModel extends Question {
     required super.question,
     required super.options,
     required super.correctAnswer,
-    required super.relatedCourse, // Include the new field
+    required super.relatedCourse,
+    required super.kpi, // Include the new field
   });
 
   // Convert Firestore data (Map) to a QuestionModel
@@ -14,7 +15,8 @@ class QuestionModel extends Question {
       question: map['question'] ?? '',
       options: List<String>.from(map['possible answers'] ?? []),
       correctAnswer: map['correct answer'] ?? '',
-      relatedCourse: map['course'] ?? '', // Ensure this key exists in Firestore
+      relatedCourse: map['course'] ?? '',
+      kpi: map['kpi'] ?? '', // Ensure this key exists in Firestore
     );
   }
 
@@ -25,6 +27,7 @@ class QuestionModel extends Question {
       'possible answers': options,
       'correct answer': correctAnswer,
       'course': relatedCourse,
+      'kpi' : kpi
     };
   }
 }
