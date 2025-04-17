@@ -19,6 +19,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoaded(user));
     } catch (e) {
       emit(ProfileError(e.toString()));
+      print(ProfileError(e.toString()));
     }
   }
 
@@ -29,6 +30,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoaded(updatedUser));
     } catch (e) {
       emit(ProfileError(e.toString()));
+      print(ProfileError(e.toString()));
     }
   }
 }

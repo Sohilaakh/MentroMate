@@ -173,41 +173,6 @@ class DeepSeekService {
     }
   }
 
-  /// 🔹 **Generate Suggested Courses Message**
-  // Future<String> generateSuggestedCoursesMessage(List<String> courses) async {
-  //   if (courses.isEmpty) return "I couldn't find any course recommendations.";
-  //
-  //   final String prompt = """
-  // You are a helpful AI assistant. provide the user links to help them improve in the following courses:
-  //
-  // ${courses.map((course) => "- $course").join("\n")}
-  //
-  // Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
-  // """;
-  //
-  //   final response = await http.post(
-  //     Uri.parse(apiUrl),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer $apiKey',
-  //     },
-  //     body: jsonEncode({
-  //       "model": "deepseek/deepseek-chat:free",
-  //       "messages": [
-  //         {"role": "user", "content": prompt}
-  //       ],
-  //     }),
-  //   );
-  //
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
-  //     String result = jsonResponse["choices"][0]["message"]["content"] ?? "No response";
-  //
-  //     return _formatResponse(result);
-  //   } else {
-  //     throw Exception('⚠️ Failed to generate suggested courses message');
-  //   }
-  // }
 
   Stream<String> generateSuggestedCoursesMessage(List<String> courses) async* {
     if (courses.isEmpty) {
@@ -215,13 +180,33 @@ class DeepSeekService {
       return;
     }
 
+//     final String prompt = """
+// You are a helpful AI assistant. Provide the user with links and make sure the links are clickable to help them improve in the following recommended courses:
+//
+// ${courses.map((course) => "- $course").join("\n")}
+//
+// Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
+// """;
+
     final String prompt = """
-You are a helpful AI assistant. Provide the user with links and make sure the links are clickable to help them improve in the following recommended courses:
+You are a helpful AI assistant. The user has received the following course recommendations:
 
 ${courses.map((course) => "- $course").join("\n")}
 
-Format your response in a professional, structured manner. Use headings, bullet points, and emojis where appropriate to make it clear and engaging.
+🎯 Your job:
+- For each course, search for a real online course (e.g., on Coursera, edX, Udemy, or similar).
+- Include a real clickable link for each.
+- Format clearly using markdown: **[Course Name](https://link.com)**
+- Use headings, bullet points, and emojis where helpful to make it friendly and readable.
+- Only use real links – do not make up URLs.
+
+Example:
+- **[Python for Beginners – Coursera](https://www.coursera.org/learn/python)**
+- **[Intro to AI – edX](https://www.edx.org/course/artificial-intelligence)**
+
+Respond in a structured format.
 """;
+
 
     final request = http.Request('POST', Uri.parse(apiUrl))
       ..headers.addAll({

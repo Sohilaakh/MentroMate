@@ -5,6 +5,7 @@ import '../../../../core/utils/color_resources.dart';
 
 class QuestionContainer extends StatelessWidget {
   final String question;
+  final int index;
   final List<String> options;
   final String? selectedOption;
   final Function(String) onSelected;
@@ -14,6 +15,7 @@ class QuestionContainer extends StatelessWidget {
 
   const QuestionContainer({
     super.key,
+    required this.index,
     required this.question,
     required this.options,
     required this.onSelected,
@@ -37,7 +39,7 @@ class QuestionContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(question, style: Styles.textStyle15,),
+          Text('${index + 1}. $question', style: Styles.textStyle15,),
           const SizedBox(height: 10),
           Column(
             children: options.map((option) {

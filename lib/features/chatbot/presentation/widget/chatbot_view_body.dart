@@ -206,30 +206,6 @@ class _ChatbotViewBodyState extends State<ChatbotViewBody> {
   }
 
   /// ✅ **Send Suggested Courses as Clickable Links**
-  // void _sendSuggestedCoursesMessage() {
-  //   if (widget.suggestedCourses.isNotEmpty) {
-  //     setState(() {
-  //       _isTyping = true;
-  //     });
-  //
-  //     _deepSeekService.generateSuggestedCoursesMessage(widget.suggestedCourses).then((message) {
-  //       setState(() {
-  //         _messages.add({
-  //           "text": _formatMessage(message),
-  //           "isSentByUser": false,
-  //         });
-  //         _isTyping = false;
-  //       });
-  //       _scrollToBottom();
-  //     }).catchError((error) {
-  //       setState(() {
-  //         _messages.add({"text": "❌ Error: $error", "isSentByUser": false});
-  //         _isTyping = false;
-  //       });
-  //       _scrollToBottom();
-  //     });
-  //   }
-  // }
   void _sendSuggestedCoursesMessage() {
     if (widget.suggestedCourses.isNotEmpty) {
       setState(() {

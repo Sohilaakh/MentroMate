@@ -30,49 +30,6 @@ class _QuestionListViewState extends State<QuestionListView> {
     super.initState();
     context.read<QuestionBloc>().add(LoadQuestions());
   }
-
-  // void _submitAnswers(List<Question> questions) {
-  //   print("Submit button pressed!");
-  //   int correctAnswers = 0;
-  //
-  //
-  //   for (int i = 0; i < questions.length; i++) {
-  //     if (userResponses[i] == questions[i].correctAnswer) {
-  //       correctAnswers++;
-  //     }
-  //   }
-  //
-  //   double score = (correctAnswers / questions.length) * 100;
-  //
-  //
-  //   // Navigator.pushNamed(context, 'mentroverso/features/questionnaire/views/score_page',
-  //   // arguments: {
-  //   //   'score' : score
-  //   // }
-  //   // );
-  //   // GoRouter.of(context).push(AppRouter.kScore,extra: score);
-  //   context.push(AppRouter.kScore, extra: score);
-  //
-  //
-  //   // showDialog(
-  //   //   context: context,
-  //   //   builder: (context) => AlertDialog(
-  //   //     title: const Text("Quiz Completed"),
-  //   //     content: Text("Your Score: ${score.toStringAsFixed(2)}%"),
-  //   //     actions: [
-  //   //       TextButton(
-  //   //         onPressed: () {
-  //   //           setState(() {
-  //   //             showCorrectAnswers = true;
-  //   //           });
-  //   //           Navigator.pop(context);
-  //   //         },
-  //   //         child: const Text("View Correct Answers"),
-  //   //       ),
-  //   //     ],
-  //   //   ),
-  //   // );
-  // }
   void _submitAnswers(List<Question> questions) {
     print("Submit button pressed!");
     int correctAnswers = 0;
@@ -130,7 +87,7 @@ class _QuestionListViewState extends State<QuestionListView> {
                           }
                         },
                         showCorrectAnswer: widget.showCorrectAnswers,
-                        correctAnswer: questions[index].correctAnswer,
+                        correctAnswer: questions[index].correctAnswer, index: index,
                       );
                     },
                   ),

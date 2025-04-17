@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatBubble extends StatelessWidget {
   final String message;
@@ -43,15 +44,36 @@ class ChatBubble extends StatelessWidget {
               ],
               Expanded(
                 child: MarkdownBody(
-                  data: message,
-                  selectable: true,
-                  styleSheet: MarkdownStyleSheet(
-                    p: TextStyle(
-                      color: isSentByUser ? Colors.white : Colors.black87,
-                      fontSize: 16,
-                    ),
+                data: message,
+                selectable: true,
+                onTapLink: (text, href, title) async {
+                  if (href != null) {
+                    final uri = Uri.parse(href);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    } else {
+                      throw 'Could not launch $href';
+                    }
+                  }
+                },
+                styleSheet: MarkdownStyleSheet(
+                  p: TextStyle(
+                    color: isSentByUser ? Colors.white : Colors.black87,
+                    fontSize: 16,
                   ),
                 ),
+              ),
+
+      // MarkdownBody(
+                //   data: message,
+                //   selectable: true,
+                //   styleSheet: MarkdownStyleSheet(
+                //     p: TextStyle(
+                //       color: isSentByUser ? Colors.white : Colors.black87,
+                //       fontSize: 16,
+                //     ),
+                //   ),
+                // ),
               ),
             ],
           ),
