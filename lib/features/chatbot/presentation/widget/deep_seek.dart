@@ -208,10 +208,13 @@ class DeepSeekService {
 
 
   Future<String> analyzeFile(String content) async {
+    // Ensure content is properly encoded as UTF-8
+    final utf8Content = content;
+
     final String prompt = """
 You are a helpful AI assistant. The user has uploaded a file with the following content:
 
-$content
+$utf8Content
 
 🎯 Your task:
 - Analyze the file content and provide a comprehensive analysis.
@@ -221,27 +224,34 @@ $content
 Respond in a structured format.
 """;
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-      },
-      body: jsonEncode({
-        "model": "deepseek/deepseek-chat:free",
-        "messages": [
-          {"role": "user", "content": prompt}
-        ],
-      }),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8', // Explicit UTF-8 charset
+          'Authorization': 'Bearer $apiKey',
+        },
+        body: utf8.encode(jsonEncode({ // Explicit UTF-8 encoding
+          "model": "deepseek/deepseek-chat:free",
+          "messages": [
+            {"role": "user", "content": prompt}
+          ],
+        })),
+      );
 
-    if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-      String result = jsonResponse["choices"][0]["message"]["content"] ?? "No response";
+      if (response.statusCode == 200) {
+        // Decode response body as UTF-8
+        final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+        String result = jsonResponse["choices"][0]["message"]["content"] ?? "No response";
 
-      return _formatResponse(result);
-    } else {
-      throw Exception('⚠️ Failed to analyze file');
+        return _formatResponse(result);
+      } else {
+        // Include the response body in the error for debugging
+        final errorBody = utf8.decode(response.bodyBytes);
+        throw Exception('⚠️ Failed to analyze file. Status: ${response.statusCode}. Body: $errorBody');
+      }
+    } catch (e) {
+      throw Exception('⚠️ Error analyzing file: $e');
     }
   }
 
