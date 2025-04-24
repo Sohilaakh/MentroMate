@@ -15,6 +15,7 @@ class AssetsData {
   static const meeting = 'assets/images/meeting.jpg';
   static const chatbot = 'assets/images/chatbot.png';
   static const questions = 'assets/images/question.jpg';
+  static const journey = 'assets/images/Journey.png';
 
 
 }

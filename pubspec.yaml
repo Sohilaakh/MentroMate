@@ -59,6 +59,7 @@ dependencies:
   flutter_linkify: ^6.0.0
   url_launcher: ^6.1.14
   flutter_dotenv: ^5.1.0
+  intl: ^0.20.2
 
 
 

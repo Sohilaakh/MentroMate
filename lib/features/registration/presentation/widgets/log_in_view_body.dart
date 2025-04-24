@@ -66,14 +66,15 @@ class _LogInBodyState extends State<LogInBody> {
                       passwordController.text,
                     );
 
-                    DialogHelper.showSuccessDialog(
-                      context: context,
-                      title: 'Success',
-                      description: 'Welcome back',
-                      onOkPress: () {
-                        GoRouter.of(context).push(AppRouter.kHome);
-                      },
-                    );
+                    // DialogHelper.showSuccessDialog(
+                    //   context: context,
+                    //   title: 'Success',
+                    //   description: 'Welcome back',
+                    //   onOkPress: () {
+                    //     GoRouter.of(context).push(AppRouter.kHome);
+                    //   },
+                    // );
+                     GoRouter.of(context).push(AppRouter.kHome);
 
                   } on FirebaseAuthException catch (e) {
                     String errorMessage = 'An error occurred. Please try again.';

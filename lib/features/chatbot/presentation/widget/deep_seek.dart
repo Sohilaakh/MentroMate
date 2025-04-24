@@ -251,9 +251,13 @@ Respond in a structured format.
 
 
 
-  Stream<String> generateSuggestedCoursesMessage(List<String> courses) async* {
+  generateSuggestedCoursesMessage(
+      List<String> courses,
+      void Function(List<String> titles) onTitlesExtracted, // Callback to return titles
+      ) async* {
     if (courses.isEmpty) {
       yield "I couldn't find any course recommendations.";
+      onTitlesExtracted([]);
       return;
     }
 
@@ -263,25 +267,20 @@ You are a helpful AI assistant. The user has received the following course recom
 ${courses.map((course) => "- $course").join("\n")}
 
 🎯 Your job:
-- For each course, search for a real online course (e.g., on Coursera, edX, Udemy, or similar).
+- For each course, search for a real online course and include courses from the following sources (freeCodeCamp,MIT OpenCourseWare,freeCodeCamp YouTube,Programming with Mosh,Tech with Tim) .
 - Include a real clickable link for each.
-- Format clearly using markdown: **[Course Name](https://link.com)**
+- Format clearly using markdown: **[Course Name](https://link.com)** and make sure it is still supported
 - Use headings, bullet points, and emojis where helpful to make it friendly and readable.
 - Only use real links – do not make up URLs.
 
-Example:
-- **[Python for Beginners – Coursera](https://www.coursera.org/learn/python)**
-- **[Intro to AI – edX](https://www.edx.org/course/artificial-intelligence)**
-
 Respond in a structured format.
 """;
-
 
     final request = http.Request('POST', Uri.parse(apiUrl))
       ..headers.addAll({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $apiKey',
-        'Accept': 'text/event-stream', // Important for streaming
+        'Accept': 'text/event-stream',
       })
       ..body = jsonEncode({
         "model": "deepseek/deepseek-chat:free",
@@ -292,6 +291,7 @@ Respond in a structured format.
       });
 
     final response = await http.Client().send(request);
+    final buffer = StringBuffer();
 
     if (response.statusCode == 200) {
       final stream = response.stream
@@ -301,9 +301,7 @@ Respond in a structured format.
       await for (var line in stream) {
         line = line.trim();
 
-        if (line.isEmpty || line.startsWith(":")) {
-          continue; // Skip empty lines or comments like ': OPENROUTER PROCESSING'
-        }
+        if (line.isEmpty || line.startsWith(":")) continue;
 
         if (line.startsWith("data: ")) {
           final jsonString = line.substring(6).trim();
@@ -315,16 +313,28 @@ Respond in a structured format.
             final content = jsonResponse["choices"]?[0]?["delta"]?["content"] ?? "";
 
             if (content.isNotEmpty) {
-              yield content;
+              buffer.write(content); // Save full response
+              yield content; // Send to UI
             }
           } catch (e) {
             print("JSON Parsing Error: $e\nRaw line: $line");
           }
         }
       }
+      List<String> _extractTitlesFromMarkdown(String responseText) {
+        final regex = RegExp(r'\*\*\[([^\]]+)\]\((https?:\/\/[^\)]+)\)\*\*');
+        final matches = regex.allMatches(responseText);
+
+        return matches.map((match) => match.group(1) ?? '').toList();
+      }
+
+      // Extract titles after full response is streamed
+      final extractedTitles = _extractTitlesFromMarkdown(buffer.toString());
+      onTitlesExtracted(extractedTitles);
     } else {
       final errorBody = await response.stream.bytesToString();
       yield '⚠️ Error: ${response.statusCode} - $errorBody';
+      onTitlesExtracted([]);
     }
   }
 

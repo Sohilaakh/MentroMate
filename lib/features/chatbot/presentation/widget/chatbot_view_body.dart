@@ -240,7 +240,16 @@ class _ChatbotViewBodyState extends State<ChatbotViewBody> {
       int botMessageIndex = _messages.length - 1;
       String botResponse = "";
 
-      _deepSeekService.generateSuggestedCoursesMessage(widget.suggestedCourses).listen((chunk) {
+      _deepSeekService.generateSuggestedCoursesMessage(
+        widget.suggestedCourses,
+            (titles) {
+          // ✅ Do something with the extracted course titles (e.g. save to Firestore)
+          print("Extracted course titles: $titles");
+
+          // Example: Save to variable or Firebase
+          // _saveSuggestedCoursesToFirestore(titles); // implement this if needed
+        },
+      ).listen((chunk) {
         setState(() {
           botResponse += chunk;
           _messages[botMessageIndex]["text"] = botResponse;
@@ -260,6 +269,7 @@ class _ChatbotViewBodyState extends State<ChatbotViewBody> {
       });
     }
   }
+
 
 
 

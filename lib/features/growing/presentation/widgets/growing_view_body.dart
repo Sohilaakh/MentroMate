@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mentroverso/core/utils/app_routes.dart';
 import 'package:mentroverso/features/growing/presentation/widgets/growing_option_card.dart';
 import '../../../../core/utils/assets.dart';
 import 'motivational_banner.dart';
@@ -34,7 +36,9 @@ class GrowingViewBody extends StatelessWidget {
               title: 'Recommended',
               description: 'Personalized courses for your growth',
               icon: Icons.format_list_numbered,
-              onTap: () {},
+              onTap: () {
+                context.push(AppRouter.kRecommendedCourses);
+              },
             ),
           ],
         ),

@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:mentroverso/core/utils/app_routes.dart';
 import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_button.dart';
 import 'package:mentroverso/features/questionnaire/presentation/widget/questionnaire_container.dart';
@@ -30,7 +33,7 @@ class _QuestionListViewState extends State<QuestionListView> {
     super.initState();
     context.read<QuestionBloc>().add(LoadQuestions());
   }
-  void _submitAnswers(List<Question> questions) {
+  Map<String, dynamic> _submitAnswers(List<Question> questions) {
     print("Submit button pressed!");
     int correctAnswers = 0;
     List<String> suggestedCourses = []; // ✅ Store courses
@@ -54,7 +57,43 @@ class _QuestionListViewState extends State<QuestionListView> {
         // ✅ Pass courses
       },
     );
+
+    return {
+      'score': score,
+      'courses': suggestedCourses,
+    };
   }
+
+  Future<void> saveQuestionnaireResult({
+    required String userId,
+    required Map<int, String> userAnswers,
+    required double score,
+    required List<String> suggestedCourses,
+  }) async {
+    final now = DateTime.now();
+    final formattedTime = DateFormat('yyyyMMdd_HHmmss').format(now);
+    final questionnaireId = 'quiz_$formattedTime';
+
+    // 🔥 Convert int keys to String
+    final stringifiedAnswers = userAnswers.map(
+          (key, value) => MapEntry(key.toString(), value),
+    );
+
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userId)
+        .collection('questionnaire_results')
+        .doc(questionnaireId)
+        .set({
+      'questionnaireId': questionnaireId,
+      'userAnswers': stringifiedAnswers, // use the converted map here!
+      'score': score,
+      'suggestedCourses': suggestedCourses,
+      'timestamp': now,
+    });
+  }
+
+
 
 
 
@@ -96,7 +135,19 @@ class _QuestionListViewState extends State<QuestionListView> {
                   padding: const EdgeInsets.all(18.0),
                   child: QuestionnaireButton(
                     userResponses: userResponses,
-                    submitAnswers: () => _submitAnswers(questions), questions: [],
+                    submitAnswers: () {
+                      final result = _submitAnswers(questions);
+                      double score = result['score'];
+                      List<String> courses = result['courses'];
+                      final user = FirebaseAuth.instance.currentUser;
+                      saveQuestionnaireResult(
+                          userId: user!.uid,
+                          userAnswers: userResponses,
+                          score: score,
+                          suggestedCourses: courses);
+
+                    }, questions: [],
+
                   ),
                 ),
               ],

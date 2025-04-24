@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mentroverso/features/chatbot/presentation/widget/drawer.dart';
 import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.dart';
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
+import 'package:mentroverso/features/growing/presentation/views/recommended_courses.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
 import 'package:mentroverso/features/questionnaire/presentation/views/Questionnaire_view.dart';
 import 'package:mentroverso/features/questionnaire/presentation/views/score_page.dart';
@@ -12,6 +13,7 @@ import '../../features/meeting/presentation/views/meeting_view.dart';
 import '../../features/profile/presentation/views/update_profile_view.dart';
 import '../../features/registration/presentation/views/log_in_view.dart';
 import '../../features/registration/presentation/views/sign_up_view.dart';
+import '../../main.dart';
 
 abstract class AppRouter {
   static const kLogIn = '/logIn';
@@ -29,6 +31,7 @@ abstract class AppRouter {
   static const kChatDrawer = '/kChatDrawer';
   static const kScore = '/kScore';
   static const kListView = '/kListView';
+  static const kRecommendedCourses= '/kRecommendedCourses';
 
 
   //GoRouter.of(context).push(AppRouter.kLogIn);
@@ -38,6 +41,10 @@ abstract class AppRouter {
       GoRoute(
         path: kChatDrawer,
         builder: (context, state) => const ChatDrawer(),
+      ),
+      GoRoute(
+        path: kRecommendedCourses,
+        builder: (context, state) => const RecommendedCourses(),
       ),
       GoRoute(
         path: AppRouter.kScore,
@@ -73,7 +80,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => AuthGate(),
       ),
       GoRoute(
         path: kSignUp,
