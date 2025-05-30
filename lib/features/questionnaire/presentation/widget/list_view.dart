@@ -24,7 +24,7 @@ class QuestionListView extends StatefulWidget {
 
 class _QuestionListViewState extends State<QuestionListView> {
   Map<int, String> userResponses = {};
-  List<String> _wrongCourses = [];
+  final List<String> _wrongCourses = [];
 
 
 

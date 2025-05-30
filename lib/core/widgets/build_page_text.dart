@@ -15,18 +15,32 @@ class BuildPageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Text(
-          title,
-          style: Styles.textStyle18,
-        ),
-        const SizedBox(height: 23),
-        if (text1 != null) Text(text1!, style: Styles.textStyle14Regular),
-        SizedBox(height: 15),
-        if (text2 != null) Text(text2!, style: Styles.textStyle14Regular),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20.0,
+        top: 5.0,
+        bottom: 5.0,
+        right: 15.0
+      ),
+      child: Column(
+        children: [ Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  title,
+                  style: Styles.textStyle18,
+                ),
+                const SizedBox(height: 23),
+                if (text1 != null) Text(text1!, style: Styles.textStyle14Regular),
+                SizedBox(height: 15),
+                if (text2 != null) Text(text2!, style: Styles.textStyle14Regular),
+              ],
+            ),
+          ),
+        ), ]
+      ),
     );
   }
 }

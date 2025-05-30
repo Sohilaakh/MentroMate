@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/widgets/custom_app_bar.dart';
-import 'package:mentroverso/core/widgets/gradient_button.dart';
 import '../../../../core/utils/app_routes.dart';
 import '../../../../core/utils/color_resources.dart';
 import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/themes.dart';
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
-import '../widget/questionnaire_view_body.dart';
 
 class ScorePage extends StatelessWidget {
   final double score;

@@ -18,16 +18,21 @@ class InterviewPageView extends StatelessWidget {
       onPageChanged: onPageChanged,
       children:  [
         BuildPageText(
-          title: 'There are some guidelines:',
-          text1: '1. Make sure you are in a quiet place.',
-          text2: '2. Test your camera and microphone.',
+          title: 'Welcome! Before you begin, here are a few quick things to know:',
+          text1: '1. Time Limit: You’ll have 10 minutes to complete the interview.',
+          text2: '2. Repeat Question: If you need to hear a question again, just press the Repeat button.',
         ),
         BuildPageText(
-          title: 'There are some guidelines:',
-          text1: '3. Prepare answers for common questions.',
-          text2: '4. Dress professionally and stay confident.',
+          title: 'Welcome! Before you begin, here are a few quick things to know:',
+          text1: '3. Finish Answer: After you answer, press the Finish Answer button to move to the next question.',
+          text2: '4. If the button is gray, it means your answer is being processed—please wait a few seconds.',
         ),
-        BuildPageText(title: 'Are you Ready ?'),
+        BuildPageText(
+          title: 'Welcome! Before you begin, here are a few quick things to know:',
+          text1: '5. Some questions may start with "Design," "Implement," or "Create"—don’t worry! You’re not expected to write code.',
+          text2: '6. focus on explaining your approach, reasoning, and structure out loud. For example, talk about the components you\'d use, how you\'d organize the system, or what factors you\'d consider to make it effective.',
+        ),
+        BuildPageText(title: 'Take a deep breath, speak clearly, and show your thinking. You\'re ready—good luck!'),
       ],
     );
   }

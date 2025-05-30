@@ -4,9 +4,9 @@ import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.
 import 'package:mentroverso/features/grades/presentation/views/grades_view.dart';
 import 'package:mentroverso/features/growing/presentation/views/recommended_courses.dart';
 import 'package:mentroverso/features/home/presentation/views/home_view.dart';
+import 'package:mentroverso/features/interview/presentation/widget/result_screen.dart';
 import 'package:mentroverso/features/questionnaire/presentation/views/Questionnaire_view.dart';
 import 'package:mentroverso/features/questionnaire/presentation/views/score_page.dart';
-import 'package:mentroverso/features/questionnaire/presentation/widget/list_view.dart';
 import '../../features/chatbot/presentation/views/chatbot_view.dart';
 import '../../features/interview/presentation/views/interview_view.dart';
 import '../../features/meeting/presentation/views/meeting_view.dart';
@@ -32,6 +32,7 @@ abstract class AppRouter {
   static const kScore = '/kScore';
   static const kListView = '/kListView';
   static const kRecommendedCourses= '/kRecommendedCourses';
+  static const kResult = '/kLResult';
 
 
   //GoRouter.of(context).push(AppRouter.kLogIn);
@@ -41,6 +42,19 @@ abstract class AppRouter {
       GoRoute(
         path: kChatDrawer,
         builder: (context, state) => const ChatDrawer(),
+      ),
+      GoRoute(
+        path: kResult,
+        builder: (context, state) {
+          final Map<String, dynamic>? data = state.extra as Map<String, dynamic>?;
+
+          final List<Map<String, dynamic>> results = (data?['results'] as List?)
+              ?.map((item) => item as Map<String, dynamic>)
+              .toList() ??
+              [];
+
+          return ResultScreen(results: results);
+        },
       ),
       GoRoute(
         path: kRecommendedCourses,

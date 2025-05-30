@@ -11,7 +11,7 @@ class PageIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmoothPageIndicator(
       controller: controller,
-      count: 3,
+      count: 4,
       effect: ExpandingDotsEffect(
         activeDotColor: ColorResources.darkMauve,
         dotColor: ColorResources.softWhite,

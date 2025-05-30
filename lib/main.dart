@@ -21,15 +21,24 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
+
   final userRepository = UserRepositoryImpl(FirebaseFirestore.instance);
   final signUpUseCase = SignUpUseCase(AuthRepositoryImpl(FirebaseAuth.instance), userRepository);
   final questionRepository = QuestionRepositoryImpl(FirebaseFirestore.instance);
   final getQuestionsByKPI = GetQuestionsByKPI(questionRepository);
 
-  runApp(MentroVerso(signUpUseCase: signUpUseCase, getQuestionsByKPI: getQuestionsByKPI, userRepository: userRepository,));
+  runApp(
+    MentroVerso(
+      signUpUseCase: signUpUseCase,
+      getQuestionsByKPI: getQuestionsByKPI,
+      userRepository: userRepository,
+    ),
+  );
 }
 
 class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -40,7 +49,7 @@ class AuthGate extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasData) {
-          return HomeView(); // Or route to your dashboard
+          return HomeView();
         } else {
           return LogIn();
         }
@@ -49,33 +58,30 @@ class AuthGate extends StatelessWidget {
   }
 }
 
-
 class MentroVerso extends StatelessWidget {
   final SignUpUseCase signUpUseCase;
   final GetQuestionsByKPI getQuestionsByKPI;
   final UserRepository userRepository;
 
-  const MentroVerso({super.key, required this.signUpUseCase, required this.getQuestionsByKPI, required this.userRepository});
+  const MentroVerso({
+    super.key,
+    required this.signUpUseCase,
+    required this.getQuestionsByKPI,
+    required this.userRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => QuestionBloc(getQuestionsByKPI),
-        ),
-        BlocProvider(
-          create: (_) => SignUpBloc(signUpUseCase),
-        ),
-        BlocProvider(
-            create: (_) => ProfileBloc(userRepository)
-        ),
+        BlocProvider(create: (_) => QuestionBloc(getQuestionsByKPI)),
+        BlocProvider(create: (_) => SignUpBloc(signUpUseCase)),
+        BlocProvider(create: (_) => ProfileBloc(userRepository)),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
       ),
-
     );
   }
 }

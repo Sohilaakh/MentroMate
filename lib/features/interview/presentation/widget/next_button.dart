@@ -18,7 +18,7 @@ class NextButton extends StatelessWidget {
     return GradientButton(
       text: text,
       onPressed: () {
-        if (controller.page?.toInt() == 2) {
+        if (controller.page?.toInt() == 3) {
           if (onFinalPageAction != null) {
             onFinalPageAction!();
           }

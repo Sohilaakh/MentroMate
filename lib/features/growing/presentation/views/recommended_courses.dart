@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentroverso/core/utils/themes.dart';
-import 'package:mentroverso/features/growing/presentation/widgets/growing_option_card.dart';
 import '../../../../core/utils/assets.dart';
 import '../../../../core/widgets/linear_gradient_back_ground_color.dart';
 import '../../../home/presentation/widgets/home_app_bar.dart';
