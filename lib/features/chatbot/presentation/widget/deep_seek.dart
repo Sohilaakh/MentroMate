@@ -8,56 +8,6 @@ import 'dart:async';
 class DeepSeekService {
   final String apiKey = dotenv.env['API_KEY'] ?? 'fallback_key_or_error';
   final String apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-
-  // Stream<String> streamResponse(String prompt) async* {
-  //   try {
-  //     final request = http.Request('POST', Uri.parse(apiUrl))
-  //       ..headers.addAll({
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer $apiKey',
-  //       })
-  //       ..body = jsonEncode({
-  //         "model": "deepseek/deepseek-chat:free",
-  //         "messages": [{"role": "user", "content": prompt}],
-  //         "stream": true,
-  //       });
-  //
-  //     final response = await http.Client().send(request);
-  //     String buffer = "";
-  //
-  //     if (response.statusCode == 200) {
-  //       await for (var chunk in response.stream.transform(utf8.decoder)) {
-  //         buffer += chunk;
-  //         List<String> messages = buffer.split("\n");
-  //         buffer = ""; // Reset buffer
-  //
-  //         for (var message in messages) {
-  //           if (message.startsWith("data: ")) {
-  //             message = message.replaceFirst("data: ", "").trim();
-  //           }
-  //
-  //           if (message.isNotEmpty && message != "[DONE]") {
-  //             try {
-  //               final jsonResponse = jsonDecode(message);
-  //               final content = jsonResponse["choices"]?[0]?["delta"]?["content"] ?? "";
-  //
-  //               if (content.isNotEmpty) {
-  //                 // Ensure response is well-formatted
-  //                 yield _formatResponse(content);
-  //               }
-  //             } catch (e) {
-  //               print("JSON Parsing Error: $e \n Raw Response: $message");
-  //             }
-  //           }
-  //         }
-  //       }
-  //     } else {
-  //       yield '⚠️ Error: ${response.statusCode} - ${await response.stream.bytesToString()}';
-  //     }
-  //   } catch (e) {
-  //     yield '⚠️ Error: $e';
-  //   }
-  // }
   Stream<String> streamResponse(String prompt) async* {
     try {
       final request = http.Request('POST', Uri.parse(apiUrl))
@@ -173,10 +123,10 @@ Respond in a structured format.
 
 
   generateSuggestedCoursesMessage(
-      List<String> courses,
+      List<String>? courses,
       void Function(List<String> titles) onTitlesExtracted, // Callback to return titles
       ) async* {
-    if (courses.isEmpty) {
+    if (courses!.isEmpty) {
       yield "I couldn't find any course recommendations.";
       onTitlesExtracted([]);
       return;

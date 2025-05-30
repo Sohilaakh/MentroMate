@@ -1,8 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mentroverso/core/utils/color_resources.dart';
+import 'package:mentroverso/core/utils/app_routes.dart';
 
 class ChatDrawer extends StatelessWidget {
   const ChatDrawer({super.key});
+
+  Stream<List<Map<String, dynamic>>> chatStream() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return const Stream.empty();
+
+    return FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userId)
+        .collection('chats')
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) {
+      final data = doc.data();
+      data['id'] = doc.id;
+      return data;
+    }).toList());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +39,52 @@ class ChatDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon:
-                    Icon(Icons.search, color: ColorResources.darkMauve),
+                    icon: Icon(Icons.search, color: ColorResources.darkMauve),
                     onPressed: () {},
                   ),
                   IconButton(
                     icon: Icon(Icons.close, color: ColorResources.darkMauve),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20),
               Expanded(
-                child: ListView(
-                  children: [
-                    buildChatSection("Chats Date"),
-                    buildChatSection("Chats Date"),
-                    buildChatSection("Chats Date"),
-                    buildChatSection("Chats Date"),
-                    buildChatSection("Chats Date"),
+                child: StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: chatStream(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(child: Text('No chats found'));
+                    }
 
-                  ],
+                    final chats = snapshot.data!;
+                    final grouped = _groupByDate(chats);
+
+                    return ListView(
+                      children: grouped.entries.map((entry) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              entry.key,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: ColorResources.forestGreen,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ...entry.value.map((chat) => buildChatItem(chat, context)),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      }).toList(),
+                    );
+                  },
                 ),
               ),
             ],
@@ -49,44 +94,53 @@ class ChatDrawer extends StatelessWidget {
     );
   }
 
-  Widget buildChatSection(String title) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: ColorResources.forestGreen),
-        ),
-        SizedBox(height: 10,),
-
-        buildChatItem(),
-        buildChatItem(),
-        buildChatItem(),
-        const Divider(),
-        SizedBox(height: 10,),
-
-      ],
-    );
+  Map<String, List<Map<String, dynamic>>> _groupByDate(List<Map<String, dynamic>> chats) {
+    final Map<String, List<Map<String, dynamic>>> grouped = {};
+    for (var chat in chats) {
+      final ts = chat['timestamp'] as Timestamp?;
+      if (ts == null) continue;
+      final dateKey = DateFormat('yyyy-MM-dd').format(ts.toDate());
+      grouped.putIfAbsent(dateKey, () => []).add(chat);
+    }
+    return grouped;
   }
 
-  Widget buildChatItem() {
+  Widget buildChatItem(Map<String, dynamic> chat, BuildContext context) {
+    final title = chat['title'] ?? 'Untitled Chat';
+    final chatId = chat['id'];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Icon(Icons.chat_rounded, color: ColorResources.darkMauve),
-            SizedBox(width: 10,),
-            Text("Chat Title", style: TextStyle(color: ColorResources.forestGreen)),
-          ],
-        )
-       ,
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context); // Close the drawer
+            GoRouter.of(context).push(
+              AppRouter.kChat,
+              extra: {'chatId': chatId},
+            );
+          },
+          child: Row(
+            children: [
+              Icon(Icons.chat_rounded, color: ColorResources.darkMauve),
+              const SizedBox(width: 10),
+              Text(title, style: TextStyle(color: ColorResources.forestGreen)),
+            ],
+          ),
+        ),
         IconButton(
           icon: Icon(Icons.delete, color: ColorResources.darkMauve),
-          onPressed: () {},
+          onPressed: () async {
+            final userId = FirebaseAuth.instance.currentUser?.uid;
+            if (userId != null) {
+              await FirebaseFirestore.instance
+                  .collection('Users')
+                  .doc(userId)
+                  .collection('chats')
+                  .doc(chatId)
+                  .delete();
+            }
+          },
         ),
       ],
     );

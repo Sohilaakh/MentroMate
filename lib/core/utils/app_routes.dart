@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentroverso/features/chatbot/presentation/widget/drawer.dart';
 import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.dart';
@@ -33,6 +35,7 @@ abstract class AppRouter {
   static const kListView = '/kListView';
   static const kRecommendedCourses= '/kRecommendedCourses';
   static const kResult = '/kLResult';
+  static const kChat = '/kChat';
 
 
   //GoRouter.of(context).push(AppRouter.kLogIn);
@@ -123,11 +126,18 @@ abstract class AppRouter {
       GoRoute(
         path: kChatbotView,
         builder: (context, state) {
-          final List<String> suggestedCourses = (state.extra as List<String>?) ?? [];
-
+          List<String> suggestedCourses = [];
           return ChatbotView(suggestedCourses: suggestedCourses);
         },
       ),
+      GoRoute(path: kChat,
+      builder: (context, state){
+        final extras = state.extra as Map<String, dynamic>?;
+        final chatId = extras?['chatId'];
+        return ChatbotView(chatId: chatId);
+      }
+      )
+
 
     ],
   );
