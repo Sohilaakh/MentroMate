@@ -11,6 +11,10 @@
 .svn/
 migrate_working_dir/
 
+*.unity3d
+*.so
+*.bin
+/il2cpp_cache/
 # IntelliJ related
 *.iml
 *.ipr
