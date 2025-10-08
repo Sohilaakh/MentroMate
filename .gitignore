@@ -16,6 +16,11 @@ build/
 app.*.symbols
 app.*.map.json
 
+# Android/Unity build caches
+android/UnityExport/
+android/app/.cxx/
+
+
 # --- Android ---
 /android/.gradle/
 android/app/.cxx/
