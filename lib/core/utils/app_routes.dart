@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentroverso/features/chatbot/presentation/widget/drawer.dart';
 import 'package:mentroverso/features/feedbacks/presentation/views/feedback_view.dart';
@@ -11,7 +9,6 @@ import 'package:mentroverso/features/questionnaire/presentation/views/Questionna
 import 'package:mentroverso/features/questionnaire/presentation/views/score_page.dart';
 import '../../features/chatbot/presentation/views/chatbot_view.dart';
 import '../../features/interview/presentation/views/interview_view.dart';
-import '../../features/meeting/presentation/views/meeting_view.dart';
 import '../../features/profile/presentation/views/update_profile_view.dart';
 import '../../features/registration/presentation/views/log_in_view.dart';
 import '../../features/registration/presentation/views/sign_up_view.dart';
@@ -90,10 +87,6 @@ abstract class AppRouter {
           final bool showCorrectAnswers = state.extra as bool;
           return QuestionnaireView(showCorrectAnswers: showCorrectAnswers,);
         },
-      ),
-      GoRoute(
-        path: kMeetingView,
-        builder: (context, state) => const MeetingView(),
       ),
       GoRoute(
         path: '/',

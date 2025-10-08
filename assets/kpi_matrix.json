@@ -1,0 +1,268 @@
+[
+  {
+    "name": "Object Oriented Programming",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Introduction to Probability and Statistics",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Data Structures and File Processing",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Discrete Structures",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Theory of Computation",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Network and Internet Programming",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Advanced Programming",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Computer Programming (Practical)",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Linear Algebra",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Digital Logic Circuits",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Operating Systems",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Database Management Systems",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Artificial Intelligence",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Computer Graphics",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Computing Algorithms",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "System Programming",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name"  : "Computer Network",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name"  : "Ordinary Differential Equations",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name"  : "Mathematical Logic (1)",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name"  : "Theory of Numbers",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Introduction to Information Systems",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Introduction to Software Engineering",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Concepts of Programming Languages",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Human-Computer Interaction",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Mathematical Analysis",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name"  : "Computer Architectural and Organization",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Intelligent Machines",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Algorithms in Bioinformatics",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "Intermediate Software Design and Engineering",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Software Testing and Quality",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Object-Oriented Design",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Numerical Methods",
+    "kpi1": true,
+    "kpi2": false,
+    "kpi3": false,
+    "kpi4": true
+  },
+  {
+    "name" : "System Simulation and Modeling",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Information Storage and Retrieval",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name"  : "Computer and Information Security",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Advanced Computer Networks",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Digital Libraries",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  },
+  {
+    "name" : "Digital Image Processing",
+    "kpi1": true,
+    "kpi2": true,
+    "kpi3": true,
+    "kpi4": true
+  }
+]
