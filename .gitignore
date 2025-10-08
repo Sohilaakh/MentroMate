@@ -1,48 +1,96 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.env
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
+# ===================================================
+# 🧠 MentroMate .gitignore
+# Flutter • Unity • Android • iOS • Firebase
+# ===================================================
 
-*.unity3d
-*.so
-*.bin
-/il2cpp_cache/
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# --- Core Flutter ---
+build/
 .dart_tool/
+.packages
 .flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
-
-# Symbolication related
+**/doc/api/
+**/ios/Flutter/.last_build_id
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# --- Android ---
+/android/.gradle/
+android/app/.cxx/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/UnityExport/
+android/app/build/
+android/local.properties
+
+# --- iOS ---
+ios/Pods/
+ios/Flutter/
+ios/DerivedData/
+ios/build/
+ios/Runner.xcworkspace/
+ios/Runner.xcodeproj/project.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+*.xcworkspacedata
+
+# --- Unity Export ---
+*.unity3d
+*.meta
+*.obj
+*.asset
+*.prefab
+*.pidb
+*.pdb
+*.mdb
+*.bak
+*.bak~
+*.tmp
+*.temp
+*.traceevents
+*.map
+*.bin
+/il2cpp_cache/
+
+# --- IDEs ---
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+.atom/
+.history/
+.svn/
+migrate_working_dir/
+
+# --- Logs, cache, misc ---
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.env
+.buildlog/
+.gradle/
+.cxx/
+
+# --- Sensitive or secret files ---
+# (Do NOT upload these to GitHub)
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+*.key
+*.pem
+*.p12
+*.keystore
+*.jks
+
+# --- Assets ---
+# Keep images and fonts, ignore heavy generated files
+assets/videos/
+assets/temp/
+assets/test/
+assets/unity_export/
+assets/old/
